@@ -3,6 +3,7 @@ import { assets } from "../assets/assets";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/pnglogo.jpg";
 import "../styles/Navbar.css";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -12,11 +13,11 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <div className="logo">
-        <img src={logo} alt="logo" />
+      <Link to="/" className="logo" >
+        <img  src={logo} alt="logo" />
         <span className="doc-red">Doc</span>
         <span className="slot-black">Slot</span>
-      </div>
+      </Link>
 
       <ul className="nav-links">
         <li>

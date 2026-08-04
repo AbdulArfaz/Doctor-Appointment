@@ -1,0 +1,157 @@
+.app-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+
+.dr-card {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #e5e7eb;
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
+}
+
+
+.dr-image-wrapper {
+  width: 280px;
+  height: 320px;
+  background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+  border-radius: 18px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.dr-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: transform 0.4s ease;
+}
+
+.dr-image-wrapper:hover .dr-image {
+  transform: scale(1.04);
+}
+
+
+.dr-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.dr-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.dr-name {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.icon-verified {
+  width: 20px;
+  height: 20px;
+}
+
+
+.dr-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.dr-degree {
+  font-size: 0.925rem;
+  font-weight: 500;
+  color: #4b5563;
+}
+
+.badge-experience {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #4f46e5;
+  background-color: #eef2ff;
+  border: 1px solid #e0e7ff;
+  padding: 4px 12px;
+  border-radius: 9999px;
+}
+
+
+.dr-about-box {
+  background-color: #f9fafb;
+  border: 1px solid #f3f4f6;
+  border-radius: 16px;
+  padding: 18px;
+  margin-bottom: 20px;
+}
+
+.about-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 8px 0;
+}
+
+.icon-info {
+  width: 15px;
+  height: 15px;
+  opacity: 0.6;
+}
+
+.about-description {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #4b5563;
+  margin: 0;
+}
+
+
+.fee-text {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #4b5563;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fee-amount {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111827;
+  background-color: #f3f4f6;
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
+
+@media (max-width: 640px) {
+  .dr-card {
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .dr-image-wrapper {
+    width: 100%;
+    height: 260px;
+  }
+}

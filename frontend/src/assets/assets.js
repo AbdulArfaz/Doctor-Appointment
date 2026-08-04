@@ -31,20 +31,10 @@ import drpurna from './drpurna.jpg'
 import drtandra from './drtandrabiswas.jpg'
 import drHimleena  from './drHimleenajpg.jpg'
 import drarun from './drarunagarwal.jpg'
-import doc2 from './doc2.png'
-import doc3 from './doc3.png'
-import doc4 from './doc4.png'
-import doc5 from './doc5.png'
-import doc6 from './doc6.png'
-import doc7 from './doc7.png'
-import doc8 from './doc8.png'
-import doc9 from './doc9.png'
-import doc10 from './doc10.png'
-import doc11 from './doc11.png'
-import doc12 from './doc12.png'
-import doc13 from './doc13.png'
-import doc14 from './doc14.png'
-import doc15 from './doc15.png'
+
+import banner from './bannerbooking.jpg'
+import docslot from './docslot.jpg'
+
 import genphysician from './genphysician.png'
 import dermato from './dermato.jpg'
 import gastro from './gastro.jpg'
@@ -55,6 +45,8 @@ import pediat from './pediat.jpg'
 
 
 export const assets = {
+    banner,
+    docslot,
     appointment_img,
     header_img,
     group_profiles,
@@ -104,11 +96,11 @@ export const specialityData = [
 export const doctors = [
     {
         _id: 'doc1',
-        name: 'Dr Siddhartha Goswami',
+        name: 'Dr. Siddhartha Goswami',
         image: drsiddharth,
         speciality: 'General physician',
         degree: 'MD (Internal Medicine), IFCCM, Critical Care Fellowship (CMC, Vellore)',
-        experience: '11 Years +',
+        experience: '11 + Years',
         about: 'Dr Siddhartha Goswami is a highly experienced general physician and internal medicine specialist with over 11 years of dedicated service in the medical field. Dr Goswami holds an MD in Internal Medicine, an Indian Fellowship in Critical Care Medicine and a Critical Care Fellowship from the renowned Christian Medical College, Vellore, which underscores his extensive educational background',
         fees: 900,
         address: {
@@ -206,7 +198,7 @@ export const doctors = [
         image: drmaileng,
         speciality: 'Gynecologist',
         degree: 'DCO',
-        experience: '15+ Years',
+        experience: '15 + Years',
         about: 'Dr. Maileng Tham is a top Obstetrician and Gynaecologist at Apollo Hospitals G S Road in Guwahati. Holding DGO, Dr. Maileng Tham specializes in diagnosing and treating a wide range of Obstetrics & Gynaecology conditions, including Adenomyosis, Endometriosis, Fertility, Menopause, Morning sickness, and more.',
         fees: 1300,
         address: {
@@ -220,7 +212,7 @@ export const doctors = [
         image: drsiddayal,
         speciality: 'Dermatologist',
         degree: 'MBBS',
-        experience: '5+ Years',
+        experience: '5 + Years',
         about: 'Dr Sidhartha Dayal Shah is a top Dermatologist at Apollo Excelcare Hospital in Guwahati. Holding MBBS,, Dr Sidhartha Dayal Shah specializes in diagnosing and treating a wide range of Dermatology conditions, including acne, Adenomyosis, Allergies, contact dermatitis, Dandruff, and more',
         fees: 1100,
         address: {
@@ -234,7 +226,7 @@ export const doctors = [
         image: drgeetanjali,
         speciality: 'Pediatricians',
         degree: 'MBBS, DCH',
-        experience: '19+ Years',
+        experience: '19 + Years',
         about: 'Dr. Geetanjali Sahariah Khound is a top Paediatrician at Apollo Hospitals G S Road in Guwahati. Holding MBBS,DCH, Dr. Geetanjali Sahariah Khound specializes in diagnosing and treating a wide range of Paediatrics conditions, including measles, Rotavirus, Pediatric Rehabilitation, Pediatric Physical Therapy, Pediatric Rehabilitation Autism Spectrum Diso, and more.',
         fees: 1400,
         address: {
@@ -249,7 +241,7 @@ export const doctors = [
         image: drradhika,
         speciality: 'Neurologist',
         degree: 'MD, DM',
-        experience: '27+ Years',
+        experience: '27 + Years',
         about: 'Dr. Radhika Ranjan Das is a top Neurologist at Apollo Hospitals G S Road in Guwahati. Holding MD, DM, Dr. Radhika Ranjan Das specializes in diagnosing and treating a wide range of Neurology conditions, including Alexander Disease, Amyotrophic lateral sclerosis, Anencephaly, Ataxia Telangiectasia, Canavan Disease, and more.',
         fees: 1500,
         address: {
@@ -278,7 +270,7 @@ export const doctors = [
         image: drtandra,
         speciality: 'General physician',
         degree: 'MD, IDCCM',
-        experience: '14+ Years',
+        experience: '14 + Years',
         about: 'Dr. Tandra Biswas is a top General Physician/ Internal Medicine Specialist at Apollo Hospitals G S Road in Guwahati. Holding MD, IDCCM, Dr. Tandra Biswas specializes in diagnosing and treating a wide range of General Physician/ Internal Medicine conditions, including Acute Pancreatitis, Antibiotic-associated diarrhea, Brucellosis, Chickenpox, Chikungunya, and more.',
         fees:1000,
         address: {
@@ -307,7 +299,7 @@ export const doctors = [
         image: drarun,
         speciality: 'Dermatologist',
         degree: 'MBBS, MD',
-        experience: '27+ Years',
+        experience: '27 + Years',
         about: 'Dr Arun Agarwal is a top Dermatologist at Apollo Clinic Guwahati, Assam in Guwahati. Holding MBBS, MD, Dr Arun Agarwal specializes in diagnosing and treating a wide range of Dermatology conditions.',
         fees: 1300,
         address: {
