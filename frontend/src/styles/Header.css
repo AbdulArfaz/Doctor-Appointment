@@ -1,0 +1,74 @@
+/* Main Hero Wrapper - Aligns Left and Right side-by-side */
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3rem 4rem;
+  background-color: #abd5f7; /* Light medical blue background card */
+  border-radius: 20px;
+  max-width: 1200px;
+  margin: 2rem auto;
+  gap: 2rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Left Content Block */
+.header-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Heading Styling */
+.hero-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2b2b2b;
+  line-height: 1.25;
+  margin-bottom: 1rem;
+}
+
+/* Blue text highlight for Doctor and Appointment */
+.hero-title .highlight {
+  color: #2b8ce0;
+}
+
+/* Subtitle paragraph */
+.hero-subtitle {
+  font-size: 0.95rem;
+  color: #171818;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* Button style */
+.appointment-btn {
+  display: inline-block;
+  background-color: #2b8ce0;
+  color: #ffffff;
+  padding: 0.8rem 1.8rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease;
+}
+
+.appointment-btn:hover {
+  background-color: #1d72ba;
+}
+
+/* Right Content Block (Image) */
+.header-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.doctors-img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
