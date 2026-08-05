@@ -10,11 +10,13 @@ import MyAppointments from './pages/MyAppointments'
 import Appointment from './pages/Appointment'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import ScrollToTop from './components/ScrollToTop'
 
 const App = () => {
   return (
     <div>
       <Navbar />
+      <ScrollToTop />
       <Routes>
         <Route path='/' element={<Home />}/>
         <Route path='/doctors' element={<Doctors />}/>
