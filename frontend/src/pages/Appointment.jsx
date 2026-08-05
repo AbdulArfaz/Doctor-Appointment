@@ -15,7 +15,7 @@ const Appointment = () => {
   const [slotIndex, setSlotIndex] = useState(0);
   const [slotTime, setSlotTime] = useState('');
 
-  const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
+  const daysOfWeek = [ 'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
 
   const getDocInfo = () => {
   
@@ -41,6 +41,10 @@ const Appointment = () => {
   for (let i = 0; i < 7; i++) {
     let currentDate = new Date(today);
     currentDate.setDate(today.getDate() + i);
+
+    if(currentDate.getDay()===0){
+      continue;
+    }
 
     let endTime = new Date(today);
     endTime.setDate(today.getDate() + i);

@@ -64,9 +64,9 @@
 .doctor-img-container {
   background: linear-gradient(135deg, #e0e7ff 0%, #eef2ff 100%);
   width: 100%;
-  height: 200px;
+  height: 220px;
   display: flex;
- 
+  
   align-items: flex-end;
   justify-content: center;
   overflow: hidden;
@@ -74,8 +74,8 @@
 
 .doctor-img-container img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: 220px;
+  object-fit: contain;
   object-position: top;
   transition: transform 0.5s ease;
 }

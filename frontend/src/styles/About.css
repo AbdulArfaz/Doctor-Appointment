@@ -1,0 +1,271 @@
+.sw-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #333333;
+}
+
+
+.sw-about- {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+  margin-bottom: 70px;
+}
+
+.sw-about-text {
+  flex: 1;
+}
+
+.sw-about-sub-tagline {
+  color: #386184;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.sw-about-title {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: #2b4964;
+  margin-bottom: 24px;
+}
+
+.sw-about-text-green {
+  color: #7ca856;
+}
+
+.sw-about-description {
+  color: #5a6e7f;
+  font-size: 16px;
+  line-height: 1.7;
+  max-width: 520px;
+}
+
+.sw-about-image {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.sw-about-image img {
+  width: 100%;
+  max-width: 520px;
+  border-radius: 20px;
+  object-fit: cover;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+
+.sw-about-banner-section {
+  margin-bottom: 80px;
+}
+
+.sw-about-banner-card {
+  background: linear-gradient(135deg, #1b5380 0%, #2b6a9e 100%);
+  border-radius: 16px;
+  padding: 50px 40px;
+  text-align: center;
+  color: #ffffff;
+  box-shadow: 0 8px 25px rgba(27, 83, 128, 0.15);
+}
+
+.sw-about-banner-card h2 {
+  font-size: 34px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.sw-about-text-highlight {
+  color: #a3e635;
+}
+
+.sw-about-banner-card p {
+  font-size: 16px;
+  line-height: 1.7;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #e2f1f8;
+  font-weight: 400;
+}
+
+
+.sw-about-pillars-container {
+  margin-bottom: 80px;
+  text-align: center;
+}
+
+.sw-about-pillars-title, 
+.sw-about-values-title {
+  color: #2b4964;
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 40px;
+  letter-spacing: -0.5px;
+}
+
+.sw-about-pillars-cards {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.sw-about-pillar-card {
+  flex: 1;
+  background-color: #ffffff;
+  border: 1px solid #e5eaef;
+  border-radius: 16px;
+  padding: 40px 35px;
+  text-align: left;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sw-about-pillar-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+.sw-about-icon-wrapper {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  font-size: 22px;
+}
+
+.sw-about-blue-icon {
+  background-color: #edf5fa;
+  color: #3b7197;
+}
+
+.sw-about-green-icon {
+  background-color: #f1f7ec;
+  color: #7ca856;
+}
+
+.sw-about-pillar-card h3 {
+  color: #2b4964;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.sw-about-pillar-card p {
+  color: #6b7c8e;
+  font-size: 14.5px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+
+.sw-about-values-container {
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.sw-about-values-grid {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.sw-about-value-card {
+  flex: 1;
+  background: linear-gradient(180deg, #f9fbfd 0%, #ffffff 100%);
+  border-radius: 12px;
+  padding: 40px 24px 35px 24px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sw-about-value-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.sw-about-border-blue {
+  border-top: 4px solid #386184;
+}
+
+.sw-about-border-green {
+  border-top: 4px solid #7ca856;
+}
+
+.sw-about-title-blue {
+  color: #386184;
+}
+
+.sw-about-title-green {
+  color: #7ca856;
+}
+
+.sw-about-value-card h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.sw-about-value-card p {
+  color: #6b7c8e;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+
+@media (max-width: 992px) {
+  .sw-about- {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .sw-about-image {
+    justify-content: center;
+  }
+
+  .sw-about-description {
+    margin: 0 auto;
+  }
+
+  .sw-about-values-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .sw-about-title {
+    font-size: 36px;
+  }
+
+  .sw-about-pillars-cards {
+    flex-direction: column;
+  }
+
+  .sw-about-banner-card {
+    padding: 35px 20px;
+  }
+
+  .sw-about-banner-card h2 {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 576px) {
+  .sw-about-values-grid {
+    grid-template-columns: 1fr;
+  }
+}

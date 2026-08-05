@@ -34,6 +34,9 @@ import drarun from './drarunagarwal.jpg'
 
 import banner from './bannerbooking.jpg'
 import docslot from './docslot.jpg'
+import stetAbout from './stethoscopeABOUT.jpg'
+import contactUs from './contactUsPhoto.jpg'
+
 
 import genphysician from './genphysician.png'
 import dermato from './dermato.jpg'
@@ -45,6 +48,8 @@ import pediat from './pediat.jpg'
 
 
 export const assets = {
+    contactUs,
+    stetAbout,
     banner,
     docslot,
     appointment_img,

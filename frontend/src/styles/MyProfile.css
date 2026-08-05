@@ -1,0 +1,149 @@
+.mp-box {
+  max-width: 800px;
+  width: 80%;
+  margin: 30px auto;
+  padding: 32px;
+  background: #111827;
+  color: #f3f4f6;
+  border-radius: 16px;
+  border: 1px solid #1f2937;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+
+.mp-top {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mp-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 14px;
+  object-fit: cover;
+  border: 2px solid #10b981;
+}
+
+.mp-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.mp-divider {
+  border: none;
+  height: 1px;
+  background: #1f2937;
+  margin: 20px 0;
+}
+
+
+.mp-sec {
+  margin-bottom: 24px;
+}
+
+.mp-head {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #9ca3af;
+  margin-bottom: 14px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+
+.mp-grid {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  row-gap: 14px;
+  column-gap: 20px;
+  align-items: center;
+}
+
+.mp-lbl {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #d1d5db;
+  margin: 0;
+}
+
+.mp-val {
+  font-size: 0.92rem;
+  color: #ffffff;
+  margin: 0;
+}
+
+.mp-link {
+  color: #38bdf8;
+}
+
+
+.mp-inp {
+  width: 100%;
+  padding: 8px 10px;
+  background-color: #1f2937;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.mp-inp:focus {
+  border-color: #10b981;
+}
+
+.mp-name-inp {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.mp-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+
+.mp-btn {
+  padding: 10px 22px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.mp-edit {
+  background: transparent;
+  color: #10b981;
+  border: 1px solid #10b981;
+}
+
+.mp-edit:hover {
+  background: #10b981;
+  color: #ffffff;
+}
+
+.mp-save {
+  background: #10b981;
+  color: #ffffff;
+}
+
+.mp-save:hover {
+  background: #059669;
+}
+
+
+@media (max-width: 480px) {
+  .mp-grid {
+    grid-template-columns: 1fr;
+    row-gap: 4px;
+  }
+}

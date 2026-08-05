@@ -12,6 +12,20 @@ const Navbar = () => {
   const [token,setToken]=useState(true)
 
   return (
+    <>
+       <div className="topnavbar">
+        <div className="topnavbar-container">
+          <div className="topnavbar-phone">
+            <i className="fa-solid fa-phone"></i>
+            <a href="tel:918724001944">918724001944</a>
+            <span className="topnavbar-divider">|</span>
+            <a href="tel:919706131039">919706131039</a>
+          </div>
+
+        </div>
+
+       </div>
+
     <nav className="navbar">
       <Link to="/" className="logo" >
         <img  src={logo} alt="logo" />
@@ -88,6 +102,7 @@ const Navbar = () => {
   )}
 </div>
     </nav>
+    </>
   );
 };
 
