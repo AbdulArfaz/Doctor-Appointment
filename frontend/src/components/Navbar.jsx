@@ -33,7 +33,7 @@ const Navbar = () => {
         <span className="slot-black">Slot</span>
       </Link>
 
-      <ul className="nav-links">
+      <ul className={`nav-links ${showMenu ? 'show-menu' : ''}`}>
         <li>
           <NavLink
             to="/"
@@ -100,6 +100,12 @@ const Navbar = () => {
       Create Account
     </button>
   )}
+  <button 
+  className="menu-toggle-btn" 
+  onClick={() => setShowMenu(!showMenu)}
+>
+  <i className={`fa-solid ${showMenu ? 'fa-xmark' : 'fa-bars'}`}></i>
+</button>
 </div>
     </nav>
     </>

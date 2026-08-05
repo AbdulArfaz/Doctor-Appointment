@@ -1,0 +1,116 @@
+body {
+  background-color: #f8fafc;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #334155;
+  padding: 24px;
+}
+
+.appointments {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.appointments h2 {
+  font-size: 1.25rem;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 8px;
+}
+
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 6px;
+  background-color: #f1f5f9;
+}
+
+.info {
+  flex: 1;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.info h3 {
+  margin: 0 0 4px;
+  font-size: 1.05rem;
+  color: #0f172a;
+}
+
+.info .speciality {
+  margin: 0 0 8px;
+  color: #64748b;
+}
+
+.info .address, .info .date {
+  margin: 4px 0;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+button {
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: 0.2s;
+}
+
+.btn-primary {
+  background-color: #2563eb;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8;
+}
+
+.btn-outline {
+  background-color: transparent;
+  border-color: #cbd5e1;
+  color: #64748b;
+}
+
+.btn-outline:hover {
+  color: #ef4444;
+  border-color: #fca5a5;
+  background-color: #fef2f2;
+}
+
+
+@media (max-width: 600px) {
+  .card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .actions {
+    width: 100%;
+    flex-direction: row;
+  }
+
+  .actions button {
+    flex: 1;
+  }
+}

@@ -140,7 +140,9 @@
   background: #059669;
 }
 
-
+.mp-inp[type="date"]{
+color-scheme: dark;
+}
 @media (max-width: 480px) {
   .mp-grid {
     grid-template-columns: 1fr;

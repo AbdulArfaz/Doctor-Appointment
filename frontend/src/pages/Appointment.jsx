@@ -137,11 +137,11 @@ useEffect(() => {
           className={`day-slot ${slotIndex === index ? 'selected' : ''}`}
         >
           <p className="day-name">
-            {item[0] && daysOfWeek[item[0].datetime.getDay()]}
-          </p>
-          <p className="day-date">
-            {item[0] && item[0].datetime.getDate()}
-          </p>
+            {item[0] && daysOfWeek[item[0]?.datetime?.getDay()]}
+            </p>
+            <p className="day-date">
+            {item[0] && item[0]?.datetime?.getDate()}
+            </p>
         </div>
       ))}
   </div>

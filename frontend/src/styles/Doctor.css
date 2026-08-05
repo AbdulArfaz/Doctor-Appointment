@@ -6,13 +6,13 @@ body {
   color: #0f172a;
 }
 
-
 .doctors-container {
   width: 100%;
- box-sizing: border-box;
+  box-sizing: border-box;
   max-width: 100%;
-  margin: 0 ;
-  padding: 40px 24px;
+  margin: 0;
+  padding: 30px 16px;
+  overflow-x: hidden;
 }
 
 .subtitle {
@@ -22,42 +22,40 @@ body {
 }
 
 
+
 .doctors-layout {
-  display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: 32px;
-  align-items: start;
+  display: flex;
+  flex-direction: column; 
+  gap: 20px;
+  box-sizing: border-box;
+  width: 100%;
 }
-
-@media (min-width: 768px) {
-  .doctors-layout {
-    display: grid;
-    grid-template-columns: 240px 1fr;
-  }
-}
-
 
 .specialities-sidebar {
   display: flex;
-  flex-wrap: wrap;
-  margin-top: 24px;
-  flex-direction: column;
-  gap: 12px;
-  
+  flex-direction: row; 
+  flex-wrap: wrap; 
+  gap: 8px;
+  margin-top: 12px;
+  overflow-x: auto;
+  box-sizing: border-box;
+  max-width: 100%;
+  padding-bottom: 8px;
+
+  -webkit-overflow-scrolling: touch;
+
 }
 
-@media (min-width: 768px) {
-  .specialities-sidebar {
-    flex-direction: column;
-    gap: 10px;
-  }
+.specialities-sidebar::-webkit-scrollbar{
+  display: none;
 }
 
 .speciality-pill {
-  width: 100%;
-  display: block;
-  padding: 12px 18px;
-  font-size: 0.9rem;
+  flex-shrink: 0;
+  width: auto; 
+  display: inline-block;
+  padding: 8px 14px;
+  font-size: 0.85rem;
   font-weight: 500;
   color: #334155;
   background-color: #ffffff;
@@ -75,7 +73,7 @@ body {
   border-color: #4f46e5;
   background-color: #f1f5f9;
   color: #4f46e5;
-  transform: translateX(4px);
+  transform: translateY(-2px);
 }
 
 .speciality-pill.active {
@@ -86,12 +84,40 @@ body {
 }
 
 
-.doctors-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-  gap: 24px;
+
+@media (min-width: 768px) {
+  .doctors-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+
+  .specialities-sidebar {
+    flex-direction: column; 
+    flex-wrap: nowrap;
+    gap: 10px;
+    margin-top: 0;
+  }
+
+  .speciality-pill {
+    width: 100%; 
+    padding: 12px 18px;
+    font-size: 0.9rem;
+  }
+
+  .speciality-pill:hover {
+    transform: translateX(4px);
+  }
 }
 
+
+
+.doctors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+  gap: 20px;
+}
 
 .doctor-card {
   background: #ffffff;
@@ -130,11 +156,9 @@ body {
   transform: scale(1.05);
 }
 
-
 .card-info {
   padding: 18px 16px;
 }
-
 
 .status-indicator {
   display: inline-flex;
@@ -190,9 +214,10 @@ body {
   color: #64748b;
   margin: 0;
 }
+
 a.doctor-card,
-a.speciality-pill{
-    text-decoration: none;
-    color: inherit;
-    display: block;
+a.speciality-pill {
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
