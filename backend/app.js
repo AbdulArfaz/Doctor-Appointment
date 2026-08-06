@@ -1,10 +1,13 @@
 import express from "express"
 import cors from "cors"
 import adminRouter from "./routes/admin.route.js"
+// import cookieParser from "cookie-parser"
 
 const app = express()
 
 app.use(express.json())
+app.use(express.urlencoded({extended: true,limit: "15mb"}))
+// app.use(cookieParser())
 app.use(cors({
     origin: '*',
     credentials: true,
@@ -26,8 +29,6 @@ export {app}
 
 
 
-// import cookieParser from "cookie-parser"
-// app.use(express.json({limit: "15mb"}))
-// app.use(express.urlencoded({extended: true,limit: "15mb"}))
+
+
 // app.use(express.static("public"))
-// app.use(cookieParser())
