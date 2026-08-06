@@ -40,7 +40,8 @@ const doctorSchema = new Schema({
         },
         available:{
             type: Boolean,
-            required:true
+            required:true,
+            default:true
         },
         fees:{
             type:Number,
@@ -61,17 +62,17 @@ const doctorSchema = new Schema({
 
 },{ minimize: true},{ timestamps: true})
 
-userSchema.pre("save", async function(next){
+doctorSchema.pre("save", async function(next){
     if(!this.isModified("password")) return 
     this.password = await bcrypt.hash(this.password,10)
     
 })
 
-userSchema.methods.isPasswordCorrect = async function(password){
+doctorSchema.methods.isPasswordCorrect = async function(password){
    return await bcrypt.compare(password,this.password)
 }
 
-userSchema.methods.generateAccessToken = function (){
+doctorSchema.methods.generateAccessToken = function (){
     return jwt.sign(
         {
             _id : this._id,
@@ -86,7 +87,7 @@ userSchema.methods.generateAccessToken = function (){
     )
 }
 
-userSchema.methods.generateRefreshToken =  function (){
+doctorSchema.methods.generateRefreshToken =  function (){
 
   return jwt.sign(
         {
@@ -103,5 +104,5 @@ userSchema.methods.generateRefreshToken =  function (){
 
 
 
-export const doctor = mongoose.models.doctor || mongoose.model('doctor',doctorSchema)
+export const Doctor = mongoose.models.Doctor || mongoose.model('Doctor',doctorSchema)
 

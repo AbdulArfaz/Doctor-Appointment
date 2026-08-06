@@ -1,25 +1,35 @@
 import {v2 as cloudinary} from 'cloudinary'
 import fs from 'fs'
+import dotenv from 'dotenv'
+import path from 'path'
 
-
-cloudinary.config(
-    {
-        cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-        api_key: process.env.CLOUDINARY_API_KEY,
-        api_secret: process.env.CLOUDINARY_API_SECRET
-    }
-)
+dotenv.config()
 
 
 const uploadOnCloudinary = async (localFilePath) => {
+
+   console.log("DEBUG ENV VALUES:", {
+      cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+   api_key: process.env.CLOUDINARY_API_KEY,
+   api_secret: process.env.CLOUDINARY_API_SECRET ? "EXISTS" : "UNDEFINED",
+   });
+    
+
+cloudinary.config({
+   cloud_name: String(process.env.CLOUDINARY_CLOUD_NAME).trim(),
+   api_key: String(process.env.CLOUDINARY_API_KEY).trim(),
+   api_secret: String(process.env.CLOUDINARY_API_SECRET).trim(),
+   secure: true,
+})
     try {
         if(!localFilePath) return null
 
-        console.log("uploading file to cloudinary:",localFilePath);
-        
+        const absolutePath = path.resolve(localFilePath)
 
-       const response = await cloudinary.uploader.upload(localFilePath,{
-            resource_type: "auto"
+        console.log("uploading file to cloudinary:",absolutePath);
+       const response = await cloudinary.uploader.unsigned_upload(absolutePath,"doc_preset",{
+            resource_type: "auto",
+            
         })
         
           if(fs.existsSync(localFilePath)){
@@ -29,7 +39,8 @@ const uploadOnCloudinary = async (localFilePath) => {
 
     } catch (error) {
          
-
+    console.log("Cloudinary Detailed Error: ", JSON.stringify(error, null, 2));
+    
     
         if(fs.existsSync(localFilePath)){
         fs.unlinkSync(localFilePath)
