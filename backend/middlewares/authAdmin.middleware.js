@@ -6,9 +6,9 @@ import { ApiError } from '../utils/ApiError.js'
 
 const authAdmin = asyncHandler(async (req,res,next)=>{
     try {
-         const token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "")
+         const token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "") || req.header("adminToken") 
    if(!token){
-    throw new ApiError(401, "Unauthorized request")
+    throw new ApiError(401, "Unauthorized request - Token missing")
    }
 
    const decodedToken = jwt.verify(token, process.env.ADMIN_ACCESS_TOKEN_SECRET)
