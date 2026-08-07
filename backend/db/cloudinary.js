@@ -29,6 +29,7 @@ cloudinary.config({
         console.log("uploading file to cloudinary:",absolutePath);
        const response = await cloudinary.uploader.unsigned_upload(absolutePath,"doc_preset",{
             resource_type: "auto",
+            timeout: 120000
             
         })
         
