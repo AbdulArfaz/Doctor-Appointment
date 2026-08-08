@@ -37,6 +37,9 @@ const userSchema = new Schema({
         phone:{
             type: String,
             default:"0000000"
+        },
+        refreshToken:{
+            type:String
         }
 },{ timestamps: true})
 

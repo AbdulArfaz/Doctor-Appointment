@@ -18,4 +18,17 @@ return res.status(200)
 
 })
 
-export {changeAvailability}
+
+const doctorsAll = asyncHandler(async(req,res)=>{
+    const doctors = await Doctor.find({}).select('-password -email')
+    if(!doctors){
+        throw new ApiError(400,'Doctors data not found')
+    }
+    return res.status(200)
+    .json(new ApiResponse(200,doctors,"get all doctors successfully"))
+})
+
+export {changeAvailability,doctorsAll}
+
+
+

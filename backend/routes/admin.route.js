@@ -12,4 +12,5 @@ adminRouter.post('/all-doctors',authAdmin,allDoctorsList)
 adminRouter.post('/change-availability',authAdmin,changeAvailability)
 
 
+
 export default adminRouter
