@@ -14,9 +14,9 @@ const Doctors = () => {
 
   const settingFilter = () =>{
     if (speciality) {
-      setFilter(doctors.filter(doc => doc.speciality === speciality))
+      setFilter(doctors?.filter(doc => doc.speciality === speciality) || [])
     }else{
-      setFilter(doctors)
+      setFilter(doctors || [])
     }
   }
 
@@ -53,7 +53,7 @@ const Doctors = () => {
 
       
         <div className="doctors-grid">
-          {filter.map((item, index) => (
+          {filter?.map((item, index) => (
             <Link
               key={index}
               to={`/appointment/${item._id}`}

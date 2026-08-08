@@ -20,12 +20,12 @@ const Appointment = () => {
   const getDocInfo = () => {
   
     if(!doctors || doctors.length === 0) return;
-    const cleanDrId = String(drId).replace(':', '').trim()
+    const cleanDrId = String(drId).replace(':', '').trim();
     const foundDoctor = doctors.find(
       (doc) => String(doc._id) === cleanDrId || String(doc._id) === cleanDrId
-    )
+    );
 
-      console.error("URL Id:", cleanDrId, "|Found Doctor:",foundDoctor);
+      console.log(`URL Id: ${cleanDrId} |Found Doctor:`,foundDoctor);
 
       if (foundDoctor) {
         setDrInfo(foundDoctor)

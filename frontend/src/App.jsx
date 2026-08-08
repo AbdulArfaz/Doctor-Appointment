@@ -12,9 +12,13 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
 
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer, toast} from 'react-toastify'
+
 const App = () => {
   return (
     <div>
+      <ToastContainer />
       <Navbar />
       <ScrollToTop />
       <Routes>
