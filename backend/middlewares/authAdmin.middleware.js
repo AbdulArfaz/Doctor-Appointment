@@ -5,8 +5,9 @@ import { ApiError } from '../utils/ApiError.js'
 
 
 const authAdmin = asyncHandler(async (req,res,next)=>{
+    
     try {
-         const token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "") || req.header("adminToken") 
+         const token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "") || req.header("adminToken") || req.header('aToken')
    if(!token){
     throw new ApiError(401, "Unauthorized request - Token missing")
    }

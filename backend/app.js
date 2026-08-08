@@ -5,15 +5,17 @@ import adminRouter from "./routes/admin.route.js"
 
 const app = express()
 
-app.use(express.json())
-app.use(express.urlencoded({extended: true,limit: "15mb"}))
+
+
 // app.use(cookieParser())
 app.use(cors({
     origin: '*',
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization","adminToken"]
+    allowedHeaders: ["Content-Type",'aToken', "Authorization","adminToken"]
 }))
+app.use(express.json())
+app.use(express.urlencoded({extended: true,limit: "15mb"}))
 
 
 app.use('/api/admin',adminRouter)

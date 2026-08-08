@@ -107,4 +107,15 @@ const loginAdmin = asyncHandler(async (req,res)=>{
      )
 })
 
-export {addDoctor,loginAdmin}
+//api to get all doctors list in admin dasboard
+
+const allDoctorsList = asyncHandler(async(req,res)=>{
+
+  const doctors = await Doctor.find({}).select('-password')
+  
+  return res
+  .status(200)
+  .json(new ApiResponse(200, doctors, "Doctor data fetch successfully"))
+})
+
+export {addDoctor,loginAdmin,allDoctorsList}
