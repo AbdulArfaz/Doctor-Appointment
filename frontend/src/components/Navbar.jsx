@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { assets } from "../assets/assets";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/pnglogo.jpg";
 import "../styles/Navbar.css";
 import { Link } from "react-router-dom";
+import { AppContext } from "../context/AppContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
 
   const [showMenu,setShowMenu]=useState(false)
-  const [token,setToken]=useState(true)
+  const {token, logoutUser} = useContext(AppContext)
 
   return (
     <>
@@ -91,7 +92,8 @@ const Navbar = () => {
       <div className="dropdown-menu">
         <p onClick={() => navigate('/my-profile')}>My Profile</p>
         <p onClick={() => navigate('/my-appointments')}>My Appointments</p>
-        <p onClick={()=>setToken(false)}>Logout</p>
+        <p onClick={logoutUser}>Logout</p>
+        
       </div>
 
     </div>

@@ -1,20 +1,60 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import '../styles/Login.css'
+ import axios from "axios";
+import { AppContext } from "../context/AppContext";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 const Login = () => {
-  const [state, setState] = useState("Sign Up");
+  //new
+  const {backendurl,setToken,setUserData} = useContext(AppContext)
+  const navigate  = useNavigate()
 
+  const [state, setState] = useState("Sign Up");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+ 
 
-  const handleSubmit = (evt) => {
+
+  const handleSubmit =async (evt) => {
     evt.preventDefault();
+    //new
+    try {
+      if (state === 'Sign Up') {
+        const {data} = await axios.post(`${backendurl}/api/user/register`,{name,email,password})
+        if(data.success || data.statusCode === 200 || data.statusCode ===201){
+          localStorage.setItem('token', data.token)
+          setToken(data.token)
+          toast.success("Account Created! Please Login. ")
+          setState('Login')
+        }else{
+          toast.error(data.message)
+        }
+      }else{
+        const {data} = await axios.post(`${backendurl}/api/user/login`,{email,password})
+        if (data.success || data.statusCode === 200) {
+          const accessToken = data.data.accessToken
+          localStorage.setItem('token', accessToken)
+          setToken(accessToken)
+          setUserData(data.data.user)
+          toast.success('Logged in Successfully')
+          navigate('/')
+        }else{
+          toast.error(data.message)
+        }
+      }
+    } catch (error) {
+      toast.error(error.response?.data?.message || error.message)
+    }
   };
+
+
 
   return (
     <>
-    <form className="login-box">
+    <form onSubmit={handleSubmit} className="login-box">
   <p className="form-header">{state === "Sign Up" ? "Create Account" : "Login"}</p>
   <p className="form-subtext">
     Please {state === "Sign Up" ? "sign up" : "log in"} to book appointment
