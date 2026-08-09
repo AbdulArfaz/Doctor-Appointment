@@ -5,14 +5,13 @@ import { toast } from "react-toastify";
 export const AppContext = createContext();
 
 const AppContextProvider = (props) => {
-  //new
+  
   axios.defaults.withCredentials = true;
 
   const currencySymbol = "$";
   const backendurl = import.meta.env.VITE_BACKEND_URL;
   const [doctors, setDoctors] = useState([]);
 
-  //new
   const [token, setToken] = useState(
     localStorage.getItem("token") && localStorage.getItem('token') !== 'undefined'
       ? localStorage.getItem("token")
@@ -33,6 +32,22 @@ const AppContextProvider = (props) => {
       toast.error(error.message);
     }
   };
+
+  const loadUserProfileImage = async () => {
+        try {
+            const { data } = await axios.get(`backendurl + "/api/user/get-profile"`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            if (data.success) {
+                setUserData(data.user);
+            } else {
+                toast.error(data.message);
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message);
+        }
+    };
 
   //new
   const logoutUser = async () => {
@@ -64,11 +79,21 @@ const AppContextProvider = (props) => {
     userData,
     setUserData,
     logoutUser,
+    loadUserProfileImage,
   };
 
   useEffect(() => {
     getDoctorsData();
   }, []);
+
+useEffect(() => {
+        if (token) {
+            loadUserProfileImage();
+        } else {
+            setUserData(false);
+        }
+    }, [token]);
+
   return (
     <AppContext.Provider value={value}>{props.children}</AppContext.Provider>
   );

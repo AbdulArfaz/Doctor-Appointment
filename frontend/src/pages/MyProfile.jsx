@@ -1,22 +1,26 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {assets} from '../assets/assets'
 import '../styles/MyProfile.css'
 import { useEffect } from 'react'
 import axios from 'axios'
+import { AppContext } from '../context/AppContext'
+
+
 
 const MyProfile = () => {
-const [userData,setUserData] = useState({
-  name:'',
-  image: '',
-  email: '',
-  phone: '',
-  address: {
-    line1:'',
-    line2:''
-  },
-  gender: '',
-  dob: ''
-})
+  const { token, backendurl, loadUserProfileImage,userData,setUserData} = useContext(AppContext)
+// const [userData,setUserData] = useState({
+//   name:'',
+//   image: '',
+//   email: '',
+//   phone: '',
+//   address: {
+//     line1:'',
+//     line2:''
+//   },
+//   gender: '',
+//   dob: ''
+// })
 
 const [image,setImage] = useState(false)
 const[edit,setEdit]= useState(false)
@@ -66,7 +70,7 @@ const[edit,setEdit]= useState(false)
             formData.append('image', image);
         }
 
-            const response = await axios.put('/api/user/update-profile', formData, {
+            const response = await axios.put(`${backendurl}/api/user/update-profile`, formData, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}`,
               'Content-Type':'multipart/form-data' },
                 
@@ -76,6 +80,7 @@ const[edit,setEdit]= useState(false)
                 setEdit(false);
                 setImage(false)
                 await fetchProfile()
+                await loadUserProfileImage()
             }
         } catch (error) {
             console.error("Error updating profile:", error);
@@ -165,9 +170,9 @@ const[edit,setEdit]= useState(false)
             </div>
           ) : (
             <p className="mp-val">
-              {userData.address.line1}
+              {userData.address?.line1}
               <br />
-              {userData.address.line2}
+              {userData.address?.line2}
             </p>
           )}
         </div>

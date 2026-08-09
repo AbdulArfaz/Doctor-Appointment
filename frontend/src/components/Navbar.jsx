@@ -10,7 +10,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const [showMenu,setShowMenu]=useState(false)
-  const {token, logoutUser} = useContext(AppContext)
+  const {token, logoutUser, userData} = useContext(AppContext)
 
   return (
     <>
@@ -77,7 +77,7 @@ const Navbar = () => {
      
       <div className="profile-header">
         <img 
-          src={assets.profile_pic} 
+          src={userData && userData.image ? userData.image : assets.profile_pic} 
           alt="profile-pic" 
           className="profile-pic" 
         />
