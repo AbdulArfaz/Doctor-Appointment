@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+
+.admin-addDoctor-form {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  max-width: 900px;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;     
+  margin: 0 auto;
+  padding: 40px 16px;
+  box-sizing: border-box;
+  color: #1e293b;
+}
+
+
+.admin-addDoctor-title,
+.admin-addDoctor-img-box,
+.admin-addDoctor-container {
+  width: 100%;
+}
+
+.admin-addDoctor-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+
+
+.admin-addDoctor-img-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.admin-addDoctor-img-box label {
+  cursor: pointer;
+}
+
+.admin-addDoctor-img-box img {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background-color: #f1f5f9;
+  border: 2px dashed #cbd5e1;
+  padding: 4px;
+  object-fit: cover;
+  transition: all 0.25s ease;
+}
+
+.admin-addDoctor-img-box label:hover img {
+  border-color: #5f6fff;
+  transform: scale(1.03);
+  background-color: #eef2ff;
+}
+
+.admin-addDoctor-img-box p {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #64748b;
+  margin: 0;
+}
+
+
+.admin-addDoctor-container {
+  background: #ffffff;
+  padding: 36px;
+  border-radius: 16px;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.03), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+  box-sizing: border-box;
+}
+
+
+.admin-addDoctor-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+.admin-addDoctor-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+.admin-addDoctor-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-addDoctor-field p {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #334155;
+  letter-spacing: 0.01em;
+}
+
+
+.admin-addDoctor-field input,
+.admin-addDoctor-field select,
+.admin-addDoctor-field textarea {
+  width: 100%;
+  padding: 12px 16px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 0.925rem;
+  color: #0f172a;
+  font-family: inherit;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.admin-addDoctor-field input::placeholder,
+.admin-addDoctor-field textarea::placeholder {
+  color: #94a3b8;
+}
+
+.admin-addDoctor-field input:hover,
+.admin-addDoctor-field select:hover,
+.admin-addDoctor-field textarea:hover {
+  background-color: #ffffff;
+  border-color: #cbd5e1;
+}
+
+
+.admin-addDoctor-field input:focus,
+.admin-addDoctor-field select:focus,
+.admin-addDoctor-field textarea:focus {
+  outline: none;
+  background-color: #ffffff;
+  border-color: #5f6fff;
+  box-shadow: 0 0 0 4px rgba(95, 111, 255, 0.12);
+}
+
+
+.admin-addDoctor-field input + input {
+  margin-top: 10px;
+}
+
+
+.admin-addDoctor-about {
+  margin-top: 24px;
+}
+
+.admin-addDoctor-about textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+
+.admin-addDoctor-btn {
+  margin-top: 28px;
+  background: linear-gradient(135deg, #5f6fff 0%, #4353ff 100%);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 14px 44px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(95, 111, 255, 0.3);
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.admin-addDoctor-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(95, 111, 255, 0.4);
+}
+
+.admin-addDoctor-btn:active {
+  transform: translateY(0);
+}
+
+
+@media (max-width: 768px) {
+  .admin-addDoctor-form {
+    min-height: auto;
+    padding: 24px 16px;
+  }
+
+  .admin-addDoctor-container {
+    padding: 24px;
+  }
+
+  .admin-addDoctor-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
