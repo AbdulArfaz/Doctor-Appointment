@@ -1,30 +1,74 @@
 import React, { useState } from 'react'
 import {assets} from '../assets/assets'
 import '../styles/MyProfile.css'
+import { useEffect } from 'react'
+import axios from 'axios'
 
 const MyProfile = () => {
 
 const [userData,setUserData] = useState({
-  name:'Abdul Arfaz',
-  image: assets.profile_pic,
-  email: 'aa@gmail.com',
-  phone: '+91 8724001944',
+  name:'',
+  image: '',
+  email: '',
+  phone: '',
   address: {
-    line1:'Saikia Chuburi Muslim Goan',
-    line2:'Mission Charali, Tezpur Assam'
+    line1:'',
+    line2:''
   },
-  gender: 'Male',
-  dob: '18-12-2001'
+  gender: '',
+  dob: ''
 })
 
 
 const[edit,setEdit]= useState(false)
 
+useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+                const response = await axios.get('/api/user/get-profile', {
+                    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+                });
+                console.log('Full response:', response.data);
+                
+                const profileData = response.data.data || response.data.user
+               if (profileData) {
+                setUserData({
+                    name: profileData.name || '',
+                    email: profileData.email || '',
+                    phone: profileData.phone || '',
+                    address: profileData.address || { line1: '', line2: '' },
+                    gender: profileData.gender || 'Male',
+                    dob: profileData.dob || '',
+                    image: profileData.image || ''
+                });
+            }
+            } catch (error) {
+                console.error("Error fetching profile:", error);
+            }
+        };
+        fetchProfile();
+    }, []);
+
+    // 2. Function to save updated data back to API
+    const handleSave = async () => {
+        try {
+            const response = await axios.put('/api/user/update-profile', userData, {
+                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+            });
+            if (response.data.success) {
+                setUserData(response.data.user);
+                setEdit(false);
+            }
+        } catch (error) {
+            console.error("Error updating profile:", error);
+        }
+    };
+
   return (
 
       <div className="mp-box">
       <div className="mp-top">
-        <img src={userData.image} alt="user" className="mp-img" />
+        <img src={userData.image || assets.profile_pic} alt="user" className="mp-img" />
         {edit ? (
           <input
             type="text"
