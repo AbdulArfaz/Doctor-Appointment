@@ -5,7 +5,6 @@ import { useEffect } from 'react'
 import axios from 'axios'
 
 const MyProfile = () => {
-
 const [userData,setUserData] = useState({
   name:'',
   image: '',
@@ -19,10 +18,10 @@ const [userData,setUserData] = useState({
   dob: ''
 })
 
-
+const [image,setImage] = useState(false)
 const[edit,setEdit]= useState(false)
 
-useEffect(() => {
+
         const fetchProfile = async () => {
             try {
                 const response = await axios.get('/api/user/get-profile', {
@@ -45,37 +44,74 @@ useEffect(() => {
             } catch (error) {
                 console.error("Error fetching profile:", error);
             }
-        };
-        fetchProfile();
-    }, []);
+          
+}
+    useEffect(()=>{
+      fetchProfile()
+    },[])
 
     // 2. Function to save updated data back to API
-    const handleSave = async () => {
+    const handleSave = async (e) => {
+      if(e) e.preventDefault()
         try {
-            const response = await axios.put('/api/user/update-profile', userData, {
-                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+            const formData = new FormData();
+        formData.append('name', userData.name);
+        formData.append('phone', userData.phone);
+        formData.append('address', JSON.stringify(userData.address));
+        formData.append('gender', userData.gender);
+        formData.append('dob', userData.dob);
+
+        // Append image file if a new file was selected
+        if (image) {
+            formData.append('image', image);
+        }
+
+            const response = await axios.put('/api/user/update-profile', formData, {
+                headers: { Authorization: `Bearer ${localStorage.getItem('token')}`,
+              'Content-Type':'multipart/form-data' },
+                
             });
             if (response.data.success) {
                 setUserData(response.data.user);
                 setEdit(false);
+                setImage(false)
+                await fetchProfile()
             }
         } catch (error) {
             console.error("Error updating profile:", error);
         }
-    };
-
+      }
+  
   return (
 
       <div className="mp-box">
       <div className="mp-top">
+    {edit ? (
+        <label htmlFor="image" style={{ cursor: 'pointer' }}>
+            <img 
+                src={image ? URL.createObjectURL(image) : (userData.image || assets.profile_pic)} 
+                alt="user" 
+                className="mp-img" 
+            />
+            <input 
+                type="file" 
+                id="image" 
+                hidden 
+                accept="image/*" 
+                onChange={(e) => setImage(e.target.files[0])} 
+            />
+        </label>
+    ) : (
         <img src={userData.image || assets.profile_pic} alt="user" className="mp-img" />
-        {edit ? (
-          <input
+    )}
+
+    {edit ? (
+        <input
             type="text"
             className="mp-inp mp-name-inp"
             value={userData.name}
             onChange={(e) => setUserData((prev) => ({ ...prev, name: e.target.value }))}
-          />
+        />
         ) : (
           <h2 className="mp-title">{userData.name}</h2>
         )}
@@ -159,7 +195,7 @@ useEffect(() => {
             <input
               type="date"
               className="mp-inp"
-              value={userData.dob}
+              value={userData.dob === 'Not Selected' ? '' : userData.dob}
               onChange={(e) => setUserData((prev) => ({ ...prev, dob: e.target.value }))}
             />
           ) : (
@@ -170,7 +206,7 @@ useEffect(() => {
 
       <div style={{ marginTop: '24px' }}>
         {edit ? (
-          <button className="mp-btn mp-save" onClick={() => setEdit(false)}>
+          <button className="mp-btn mp-save" onClick={(e)=>handleSave(e)}>
             Save Information
           </button>
         ) : (
@@ -183,5 +219,6 @@ useEffect(() => {
 
   )
 }
+
 
 export default MyProfile
