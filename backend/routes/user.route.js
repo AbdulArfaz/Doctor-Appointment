@@ -1,5 +1,5 @@
 import express from 'express'
-import { loginUser, logoutUser, refreshAccessToken, registerUser } from '../controllers/user.controller.js'
+import { getUserProfile, loginUser, logoutUser, refreshAccessToken, registerUser, updateUserProfile } from '../controllers/user.controller.js'
 import { upload } from '../middlewares/multer.middleware.js'
 import { user } from '../models/user.model.js'
 import {verifyJWT} from '../middlewares/authUser.middleware.js'
@@ -15,6 +15,9 @@ userRouter.post('/register',upload.single('image'), registerUser)
 userRouter.post('/login', loginUser)
 userRouter.route("/logout").post(verifyJWT, logoutUser)
 userRouter.route("/refreshToken").post(refreshAccessToken)
+
+userRouter.get('/get-profile',verifyJWT,getUserProfile)
+userRouter.put('/update-profile', verifyJWT,updateUserProfile)
 
 
 export default userRouter

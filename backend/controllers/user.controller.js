@@ -192,4 +192,49 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
   }
 });
 
+
+// Fetch Current User Profile
+export const getUserProfile = asyncHandler(async (req, res) => {
+    const user = req.user;
+
+    return res.status(200).json({
+        success: true,
+        message: "User profile fetched successfully",
+        user: {
+            name: user.name || "",
+            email: user.email || "",
+            phone: user.phone || "",
+            address: user.address || { line1: "", line2: "" },
+            gender: user.gender || "Male",
+            dob: user.dob || "",
+            image: user.image || ""
+        }
+    });
+});
+
+// Update Profile Information
+export const updateUserProfile = asyncHandler(async (req, res) => {
+    const { name, phone, address, gender, dob } = req.body;
+
+    const updatedUser = await User.findByIdAndUpdate(
+        req.user._id,
+        {
+            $set: {
+                name,
+                phone,
+                address, // expects { line1: "...", line2: "..." }
+                gender,
+                dob
+            }
+        },
+        { new: true }
+    ).select("-password -refreshToken");
+
+    return res.status(200).json({
+        success: true,
+        message: "Profile updated successfully",
+        user: updatedUser
+    });
+});
+
 export { registerUser, loginUser, logoutUser,refreshAccessToken };
