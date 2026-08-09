@@ -17,7 +17,7 @@ userRouter.route("/logout").post(verifyJWT, logoutUser)
 userRouter.route("/refreshToken").post(refreshAccessToken)
 
 userRouter.get('/get-profile',verifyJWT,getUserProfile)
-userRouter.put('/update-profile', verifyJWT,updateUserProfile)
+userRouter.put('/update-profile', verifyJWT,upload.single('image'),updateUserProfile)
 
 
 export default userRouter

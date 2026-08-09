@@ -5,6 +5,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import uploadOnCloudinary from "../db/cloudinary.js";
 import { user as User } from "../models/user.model.js";
 import validator from "validator";
+import fs from 'fs'
 
 const genAccessandRefreshTokens = async (userId) => {
   try {
@@ -193,7 +194,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 });
 
 
-// Fetch Current User Profile
+
 export const getUserProfile = asyncHandler(async (req, res) => {
     const user = req.user;
 
@@ -212,20 +213,40 @@ export const getUserProfile = asyncHandler(async (req, res) => {
     });
 });
 
-// Update Profile Information
+
 export const updateUserProfile = asyncHandler(async (req, res) => {
     const { name, phone, address, gender, dob } = req.body;
+    const imageFile = req.file; // Populated by multer middleware
+
+    // Parse address if sent as a JSON string via FormData from React
+    if (typeof address === 'string') {
+        try {
+            address = JSON.parse(address);
+        } catch (e) {
+            // Keep original address string if parsing fails
+        }
+    }
+
+    const updateData = { name, phone, address, gender, dob };
+
+    // If a new image was uploaded, upload it to Cloudinary and set the image field
+    if (imageFile) {
+        const imageUpload = await uploadOnCloudinary(imageFile.path);
+        console.log('upload cloud url:',imageUpload.secure_url);
+        if(imageUpload){
+          updateData.image = imageUpload.url || imageUpload.secure_url
+        }
+        
+    
+    if (fs.existsSync(imageFile.path)) {
+        fs.unlinkSync(imageFile.path)
+    }
+  }
 
     const updatedUser = await User.findByIdAndUpdate(
         req.user._id,
         {
-            $set: {
-                name,
-                phone,
-                address, // expects { line1: "...", line2: "..." }
-                gender,
-                dob
-            }
+            $set: updateData
         },
         { new: true }
     ).select("-password -refreshToken");
