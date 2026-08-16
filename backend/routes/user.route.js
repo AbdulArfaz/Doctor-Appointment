@@ -1,5 +1,5 @@
 import express from 'express'
-import { bookAppointment, getUserProfile, loginUser, logoutUser, refreshAccessToken, registerUser, updateUserProfile } from '../controllers/user.controller.js'
+import { bookAppointment, cancelAppointment, getUserProfile, loginUser, logoutUser, myAppointments, refreshAccessToken, registerUser, updateUserProfile } from '../controllers/user.controller.js'
 import { upload } from '../middlewares/multer.middleware.js'
 import { User } from '../models/user.model.js'
 import {verifyJWT} from '../middlewares/authUser.middleware.js'
@@ -19,6 +19,8 @@ userRouter.route("/refreshToken").post(refreshAccessToken)
 userRouter.get('/get-profile',verifyJWT,getUserProfile)
 userRouter.put('/update-profile', verifyJWT,upload.single('image'),updateUserProfile)
 userRouter.post('/book-appointment', verifyJWT,bookAppointment)
+userRouter.get('/appointments',verifyJWT,myAppointments)
+userRouter.post('/cancel-appointment',verifyJWT,cancelAppointment)
 
 
 export default userRouter

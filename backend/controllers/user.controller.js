@@ -241,7 +241,7 @@ export const updateUserProfile = asyncHandler(async (req, res) => {
     {
       $set: updateData,
     },
-    { new: true },
+    { returnDocument: 'after'},
   ).select("-password -refreshToken");
 
   return res.status(200).json({
@@ -251,7 +251,7 @@ export const updateUserProfile = asyncHandler(async (req, res) => {
   });
 });
 
-//api to book appointment
+
 export const bookAppointment = asyncHandler(async (req,res)=>{
   const userId = req.user?._id ;
   const {docId,slotDate,slotTime} = req.body;
@@ -315,5 +315,68 @@ export const bookAppointment = asyncHandler(async (req,res)=>{
   })
 
 }) 
+
+
+export const myAppointments = asyncHandler (async (req,res)=>{
+  const userId = req.user?._id;
+  if (!userId) {
+    throw new ApiError(400,'User ID is required to fetch appointments')
+  }
+  const appointments = await Appointment.find({userId})
+
+  return res.status(200)
+  .json(
+    new ApiResponse(
+      200,
+      appointments,
+      'User appointments fetched Successfully'
+    )
+  )
+})
+
+export const cancelAppointment = asyncHandler(async(req,res)=>{
+  const userId = req.user?._id || req.userId;
+  const { appointmentId } = req.body;
+  
+  if (!appointmentId) {
+    throw new ApiError(400, 'Appointment ID is required')
+  }
+
+  const appointmentData = await Appointment.findById(appointmentId)
+  if (!appointmentData) {
+    throw new ApiError(404,'Appointment record not found in DataBase')
+  }
+
+  if (appointmentData.userId.toString() !== userId.toString()) {
+    throw new ApiError(404, "Appointment not found or unauthorized access")
+  }
+  await Appointment.findByIdAndUpdate(appointmentId, {cancelled: true})
+
+  const {docId, slotDate, slotTime} = appointmentData
+  const doctorData = await Doctor.findById(docId);
+
+  if (doctorData) {
+        let slots_booked = doctorData.slots_booked || {};
+
+
+        if (slots_booked[slotDate]) {
+            slots_booked[slotDate] = slots_booked[slotDate].filter(
+                (time) => time.trim().toLowerCase() !== slotTime.trim().toLowerCase()
+            );
+            doctorData.slots_booked = slots_booked;
+            doctorData.markModified('slots_booked');
+            await doctorData.save();
+        } else {
+            console.log(" Date key not found in doctor's slots_booked!");
+        }
+    }
+
+  return res.status(200)
+  .json(
+    new ApiResponse(200, {},"Appointment Cancelled Successfully")
+  )
+})
+
+
 
 export { registerUser, loginUser, logoutUser, refreshAccessToken };
