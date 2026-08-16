@@ -10,6 +10,7 @@ const authAdmin = asyncHandler(async (req, res, next) => {
       req.header("Authorization")?.replace("Bearer ", "") ||
       req.header("adminToken") ||
       req.header("aToken");
+
     if (!token) {
       throw new ApiError(401, "Unauthorized request - Token missing");
     }
@@ -19,7 +20,10 @@ const authAdmin = asyncHandler(async (req, res, next) => {
       process.env.ADMIN_ACCESS_TOKEN_SECRET,
     );
 
-    const admin = await Admin.findById(decodedToken?._id).select("-password");
+    const adminId = decodedToken?._id || decodedToken?.id;
+
+    const admin = await Admin.findById(adminId).select("-password");
+
     if (!admin) {
       throw new ApiError(401, "Invalid Access Token: Admin Not Found");
     }

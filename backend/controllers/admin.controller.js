@@ -6,6 +6,7 @@ import { Doctor } from '../models/doctor.model.js'
 import uploadOnCloudinary  from '../db/cloudinary.js'
 import { ApiResponse } from '../utils/ApiResponse.js'
 import { Admin } from '../models/admin.model.js'
+import { Appointment } from '../models/appointment.model.js'
 
 const addDoctor = asyncHandler (async (req,res)=>{
     
@@ -107,7 +108,7 @@ const loginAdmin = asyncHandler(async (req,res)=>{
      )
 })
 
-//api to get all doctors list in admin dasboard
+
 
 const allDoctorsList = asyncHandler(async(req,res)=>{
 
@@ -116,6 +117,11 @@ const allDoctorsList = asyncHandler(async(req,res)=>{
   return res
   .status(200)
   .json(new ApiResponse(200, doctors, "Doctor data fetch successfully"))
+})
+
+export const appointmentsAdmin = asyncHandler(async (req, res) => {
+    const appointments = await Appointment.find({})
+    res.json({ success: true, appointments })
 })
 
 export {addDoctor,loginAdmin,allDoctorsList}
