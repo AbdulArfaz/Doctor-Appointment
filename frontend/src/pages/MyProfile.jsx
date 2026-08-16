@@ -9,18 +9,7 @@ import { AppContext } from '../context/AppContext'
 
 const MyProfile = () => {
   const { token, backendurl, loadUserProfileImage,userData,setUserData} = useContext(AppContext)
-// const [userData,setUserData] = useState({
-//   name:'',
-//   image: '',
-//   email: '',
-//   phone: '',
-//   address: {
-//     line1:'',
-//     line2:''
-//   },
-//   gender: '',
-//   dob: ''
-// })
+
 
 const [image,setImage] = useState(false)
 const[edit,setEdit]= useState(false)
