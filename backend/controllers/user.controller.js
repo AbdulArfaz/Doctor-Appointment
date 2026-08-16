@@ -8,6 +8,8 @@ import validator from "validator";
 import fs from "fs";
 import { Doctor } from "../models/doctor.model.js";
 import { Appointment } from "../models/appointment.model.js";
+import razorpay from 'razorpay';
+import crypto from 'crypto';
 
 const genAccessandRefreshTokens = async (userId) => {
   try {
@@ -376,6 +378,63 @@ export const cancelAppointment = asyncHandler(async(req,res)=>{
     new ApiResponse(200, {},"Appointment Cancelled Successfully")
   )
 })
+
+//api to make payment of appointment using razorpay
+const razorpayInstance = new razorpay({
+    key_id:process.env.RAZORPAY_KEY_ID,
+    key_secret:process.env.RAZORPAY_KEY_SECRET,
+  })
+
+
+export const paymentRazorpay = asyncHandler(async(req,res)=>{
+  
+const { appointmentId } = req.body;
+if (!appointmentId) {
+  throw new ApiError(400, "Appointment Id is required")
+}
+
+const appointmentData = await Appointment.findById(appointmentId)
+if (!appointmentData || appointmentData.cancelled) {
+  throw new ApiError(404,'Appointment not found or already cancelled')
+}
+
+const options = {
+  amount: Math.abs(Number(appointmentData.amount)) * 100,
+  currency: process.env.CURRENCY || 'INR',
+  receipt: appointmentId.toString(),
+}
+
+const order = await razorpayInstance.orders.create(options)
+return res.status(200)
+.json(new ApiResponse(200, order,'Razorpay order created Successfully'))
+})
+
+
+export const verifyRazorpay = asyncHandler(async (req, res) => {
+    const { razorpay_order_id, razorpay_payment_id, razorpay_signature, appointmentId } = req.body;
+
+    if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature || !appointmentId) {
+        throw new ApiError(400, "Missing payment details for verification");
+    }
+
+    const body = `${razorpay_order_id}|${razorpay_payment_id}`;
+    const expectedSignature = crypto
+        .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
+        .update(body)
+        .digest('hex');
+
+    
+    if (expectedSignature !== razorpay_signature) {
+        throw new ApiError(400, "Payment verification failed. Invalid signature.");
+    }
+
+    
+    await Appointment.findByIdAndUpdate(appointmentId, { payment: true });
+
+    return res
+        .status(200)
+        .json(new ApiResponse(200, {}, "Payment verified successfully"));
+});
 
 
 
