@@ -3,9 +3,11 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import uploadOnCloudinary from "../db/cloudinary.js";
-import { user as User } from "../models/user.model.js";
+import { User } from "../models/user.model.js";
 import validator from "validator";
-import fs from 'fs'
+import fs from "fs";
+import { Doctor } from "../models/doctor.model.js";
+import { Appointment } from "../models/appointment.model.js";
 
 const genAccessandRefreshTokens = async (userId) => {
   try {
@@ -173,9 +175,8 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
       httpOnly: true,
       secure: true,
     };
-    const { accessToken, refreshToken: newRefreshToken } = await genAccessandRefreshTokens(
-      user._id,
-    );
+    const { accessToken, refreshToken: newRefreshToken } =
+      await genAccessandRefreshTokens(user._id);
 
     return res
       .status(200)
@@ -193,69 +194,126 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
   }
 });
 
-
-
 export const getUserProfile = asyncHandler(async (req, res) => {
-    const user = req.user;
+  const user = req.user;
 
-    return res.status(200).json({
-        success: true,
-        message: "User profile fetched successfully",
-        user: {
-            name: user.name || "",
-            email: user.email || "",
-            phone: user.phone || "",
-            address: user.address || { line1: "", line2: "" },
-            gender: user.gender || "Male",
-            dob: user.dob || "",
-            image: user.image || ""
-        }
-    });
+  return res.status(200).json({
+    success: true,
+    message: "User profile fetched successfully",
+    user: {
+      name: user.name || "",
+      email: user.email || "",
+      phone: user.phone || "",
+      address: user.address || { line1: "", line2: "" },
+      gender: user.gender || "Male",
+      dob: user.dob || "",
+      image: user.image || "",
+    },
+  });
 });
 
-
 export const updateUserProfile = asyncHandler(async (req, res) => {
-    const { name, phone, address, gender, dob } = req.body;
-    const imageFile = req.file; // Populated by multer middleware
+  const { name, phone, address, gender, dob } = req.body;
+  const imageFile = req.file;
 
-    // Parse address if sent as a JSON string via FormData from React
-    if (typeof address === 'string') {
-        try {
-            address = JSON.parse(address);
-        } catch (e) {
-            // Keep original address string if parsing fails
-        }
+  if (typeof address === "string") {
+    try {
+      address = JSON.parse(address);
+    } catch (e) {}
+  }
+
+  const updateData = { name, phone, address, gender, dob };
+
+  if (imageFile) {
+    const imageUpload = await uploadOnCloudinary(imageFile.path);
+    console.log("upload cloud url:", imageUpload.secure_url);
+    if (imageUpload) {
+      updateData.image = imageUpload.url || imageUpload.secure_url;
     }
 
-    const updateData = { name, phone, address, gender, dob };
-
-    // If a new image was uploaded, upload it to Cloudinary and set the image field
-    if (imageFile) {
-        const imageUpload = await uploadOnCloudinary(imageFile.path);
-        console.log('upload cloud url:',imageUpload.secure_url);
-        if(imageUpload){
-          updateData.image = imageUpload.url || imageUpload.secure_url
-        }
-        
-    
     if (fs.existsSync(imageFile.path)) {
-        fs.unlinkSync(imageFile.path)
+      fs.unlinkSync(imageFile.path);
     }
   }
 
-    const updatedUser = await User.findByIdAndUpdate(
-        req.user._id,
-        {
-            $set: updateData
-        },
-        { new: true }
-    ).select("-password -refreshToken");
+  const updatedUser = await User.findByIdAndUpdate(
+    req.user._id,
+    {
+      $set: updateData,
+    },
+    { new: true },
+  ).select("-password -refreshToken");
 
-    return res.status(200).json({
-        success: true,
-        message: "Profile updated successfully",
-        user: updatedUser
-    });
+  return res.status(200).json({
+    success: true,
+    message: "Profile updated successfully",
+    user: updatedUser,
+  });
 });
 
-export { registerUser, loginUser, logoutUser,refreshAccessToken };
+//api to book appointment
+export const bookAppointment = asyncHandler(async (req,res)=>{
+  const userId = req.user?._id ;
+  const {docId,slotDate,slotTime} = req.body;
+
+  const docData = await Doctor.findById(docId).select("-password");
+  if (!docData) {
+    throw new ApiError(404,'Doctor not found')
+  }
+  if (!docData.available) {
+    throw new ApiError(400, "doctor is not available right now");
+  }
+
+  let slots_booked = docData.slots_booked || {};
+  
+  if (slots_booked[slotDate]) {
+      if(slots_booked[slotDate].includes(slotTime)){
+          throw new ApiError(400, "slots not available")
+      }else{
+        slots_booked[slotDate].push(slotTime)
+      }
+  }else {
+    slots_booked[slotDate] = []
+    slots_booked[slotDate].push(slotTime)
+  }
+
+  const userData = await User.findById(userId).select("-password")
+  if (!userData) {
+    throw new ApiError(404,'User not found')
+  }
+
+  const doctorObj=docData.toObject()
+  delete docData.slots_booked
+
+  const userObj = userData.toObject()
+
+  const appointmentData = {
+    userId,
+    docId,
+    userData,
+    docData:doctorObj,
+    amount:docData.fees,
+    slotTime,
+    slotDate,
+    date : Date.now()
+  }
+
+  const newAppointment = new Appointment(appointmentData)
+  await newAppointment.save()
+
+  //save new slots data in docData
+  await Doctor.findByIdAndUpdate(
+    docId,
+    {slots_booked},
+     {returnDocument: 'after'},
+  )
+
+  return res.status(200)
+  .json({
+    success:true,
+    message:'Appointment Booked'
+  })
+
+}) 
+
+export { registerUser, loginUser, logoutUser, refreshAccessToken };
