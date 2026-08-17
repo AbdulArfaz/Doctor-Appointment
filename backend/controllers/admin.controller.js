@@ -7,6 +7,7 @@ import uploadOnCloudinary  from '../db/cloudinary.js'
 import { ApiResponse } from '../utils/ApiResponse.js'
 import { Admin } from '../models/admin.model.js'
 import { Appointment } from '../models/appointment.model.js'
+import { User } from '../models/user.model.js'
 
 const addDoctor = asyncHandler (async (req,res)=>{
     
@@ -122,6 +123,63 @@ const allDoctorsList = asyncHandler(async(req,res)=>{
 export const appointmentsAdmin = asyncHandler(async (req, res) => {
     const appointments = await Appointment.find({})
     res.json({ success: true, appointments })
+})
+
+export const adminAppointmentCancel = asyncHandler(async(req,res)=>{
+  const { appointmentId } = req.body;
+  
+  if (!appointmentId) {
+    throw new ApiError(400, 'Appointment ID is required')
+  }
+
+  const appointmentData = await Appointment.findById(appointmentId)
+  if (!appointmentData) {
+    throw new ApiError(404,'Appointment record not found in DataBase')
+  }
+
+  await Appointment.findByIdAndUpdate(appointmentId, {cancelled: true})
+
+  const {docId, slotDate, slotTime} = appointmentData
+  const doctorData = await Doctor.findById(docId);
+
+  if (doctorData) {
+        let slots_booked = doctorData.slots_booked || {};
+
+
+        if (slots_booked[slotDate]) {
+            slots_booked[slotDate] = slots_booked[slotDate].filter(
+                (time) => time.trim().toLowerCase() !== slotTime.trim().toLowerCase()
+            );
+            doctorData.slots_booked = slots_booked;
+            doctorData.markModified('slots_booked');
+            await doctorData.save();
+        } else {
+            console.log(" Date key not found in doctor's slots_booked!");
+        }
+    }
+
+  return res.status(200)
+  .json(
+    new ApiResponse(200, {},"Appointment Cancelled Successfully")
+  )
+})
+
+
+export const adminDashboard = asyncHandler  (async (req,res) =>{
+
+     const doctors = await Doctor.find({})
+     const users = await User.find({})
+     const appointments = await Appointment.find({})
+
+     const dashData = {
+      doctors: doctors.length,
+      appointments: appointments.length,
+      patients: users.length,
+      latestAppointments: appointments.reverse().slice(0,10)
+     }
+     return res
+     .status(200)
+     .json( new ApiResponse(200, dashData,"Dashboard data fetched successfully"))    
 })
 
 export {addDoctor,loginAdmin,allDoctorsList}
