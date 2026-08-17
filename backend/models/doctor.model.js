@@ -80,9 +80,9 @@ doctorSchema.methods.generateAccessToken = function (){
             name : this.name,
             role : this.role
         },
-        process.env.ACCESS_TOKEN_SECRET,
+        process.env.DOCTOR_ACCESS_TOKEN_SECRET,
         {
-            expiresIn: process.env.ACCESS_TOKEN_EXPIRY
+            expiresIn: process.env.DOCTOR_ACCESS_TOKEN_EXPIRY
         }
     )
 }
@@ -93,9 +93,9 @@ doctorSchema.methods.generateRefreshToken =  function (){
         {
             _id : this._id,
         },
-        process.env.REFRESH_TOKEN_SECRET,
+        process.env.DOCTOR_REFRESH_TOKEN_SECRET,
         {
-            expiresIn: process.env.REFRESH_TOKEN_EXPIRY
+            expiresIn: process.env.DOCTOR_REFRESH_TOKEN_EXPIRY
         }
     )
 
