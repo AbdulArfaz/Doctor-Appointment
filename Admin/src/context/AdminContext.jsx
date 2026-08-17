@@ -10,6 +10,7 @@ const AdminContextProvider = (props) => {
   const [adminToken, setAdminToken] = useState(
     localStorage.getItem("accessToken") || "",
   );
+  const[dashData,setDashData] = useState(false)
 
   const backendurl = import.meta.env.VITE_BACKEND_URL;
 
@@ -63,6 +64,44 @@ const AdminContextProvider = (props) => {
     }
   }
 
+  const adminAppointmentCancel =async (appointmentId) =>{
+
+    try {
+      
+     const { data } = await axios.post(`${backendurl}/api/admin/cancel-appointment`,
+      {appointmentId},
+      {headers: {aToken: adminToken}}
+     )
+     if (data.success) {
+      toast.success(data.message)
+      getAllAppointments()
+     } else {
+      toast.error(data.message)
+     }
+
+    } catch (error) {
+       toast.error(error.message)
+    }
+  }
+
+  const getDashData = async () =>{
+    try {
+
+      const { data } = await axios.get(`${backendurl}/api/admin/dashboard`,
+        {headers: {aToken: adminToken}}
+      )
+      if(data.success){
+        setDashData(data.data)
+        
+      } else {
+        toast.error(data.message)
+      }
+      
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
+
   const value = {
     adminToken,
     setAdminToken,
@@ -73,6 +112,9 @@ const AdminContextProvider = (props) => {
     appointments,
     setAppointments,
     getAllAppointments,
+    adminAppointmentCancel,
+    dashData,setDashData,
+    getDashData,
   };
   return (
     <AdminContext.Provider value={value}>

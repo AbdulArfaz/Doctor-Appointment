@@ -1,45 +1,79 @@
-import React from 'react'
-import { useContext } from 'react'
-import { AdminContext } from '../context/AdminContext'
-import { useEffect } from 'react'
+import React from "react";
+import { useContext } from "react";
+import { AdminContext } from "../context/AdminContext";
+import { useEffect } from "react";
+import { AppContext } from "../context/AppContext";
+import { assets } from "../assets_admin/assets.js";
+import '../styles/AdminAllAppointments.css'
 
 const AdminAllAppointments = () => {
+  const { adminToken, appointments, getAllAppointments, adminAppointmentCancel } =
+    useContext(AdminContext);
+  const { calculateAge, dateFormat, currency } = useContext(AppContext);
 
-const { adminToken, appointments, getAllAppointments} = useContext(AdminContext)
+  useEffect(() => {
+    if (adminToken) {
+      getAllAppointments();
+    }
+  }, [adminToken]);
 
-useEffect(()=>{
-if (adminToken) {
-  getAllAppointments()
-}
-},[adminToken])
+return (
+  <div className="ad-ap-container">
+    <p className="ad-ap-title">All Appointments</p>
 
-  return (
-    <div>
-        <p>All Appointments</p>
-        <div>
-          <div>
-            <p>#</p>
-            <p>Patient</p>
-            <p>Age</p>
-            <p>Date & Time</p>
-            <p>Doctor</p>
-            <p>Fees</p>
-            <p>Action</p>
+    <div className="ad-ap-card">
+      <div className="ad-ap-header">
+        <p>#</p>
+        <p>Patient</p>
+        <p>Age</p>
+        <p>Date & Time</p>
+        <p>Doctor</p>
+        <p>Fees</p>
+        <p>Action</p>
+      </div>
+
+    
+      {appointments.map((item, index) => (
+        <div key={index} className="ad-ap-row">
+          <p className="ad-ap-index">{index + 1}</p>
+
+          <div className="ad-ap-user">
+            <img className="ad-ap-img" src={item.userData.image} alt="" />
+            <p className="ad-ap-name">{item.userData.name}</p>
           </div>
 
-          {appointments.map((item,index)=>(
-              <div key={index}>
-                <p>{index + 1}</p>
-                <div>
-                  <img src={item.userData.image} alt='' />
-                  <p>{item.userData.name}</p>
-                </div>
-              </div>
-          ))
-          }
+          <p className="ad-ap-age">{calculateAge(item.userData.dob)}</p>
+
+          <p>
+            {dateFormat(item.slotDate)}, {item.slotTime}
+          </p>
+
+          <div className="ad-ap-user">
+            <img className="ad-ap-img ad-ap-doc-img" src={item.docData.image} alt="" />
+            <p className="ad-ap-name">{item.docData.name}</p>
+          </div>
+
+          <p>
+            {currency}{item.amount}
+          </p>
+
+          <div>
+            {item.cancelled ? (
+              <p className="ad-ap-cancelled">Cancelled</p>
+            ) : (
+              <img
+                onClick={()=>adminAppointmentCancel(item._id)}
+                className="ad-ap-cancel-btn"
+                src={assets.cancel_icon}
+                alt="Cancel"
+              />
+            )}
+          </div>
         </div>
+      ))}
     </div>
-  )
+  </div>
+);
 }
 
-export default AdminAllAppointments
+export default AdminAllAppointments;
