@@ -1,10 +1,10 @@
 import React from "react";
 import { useContext } from "react";
-import { AdminContext } from "../context/AdminContext";
+import { AdminContext } from "../../context/AdminContext.jsx";
 import { useEffect } from "react";
-import { AppContext } from "../context/AppContext";
-import { assets } from "../assets_admin/assets.js";
-import '../styles/AdminAllAppointments.css'
+import { AppContext } from "../../context/AppContext.jsx";
+import { assets } from "../../assets_admin/assets.js";
+import '../../styles/AdminAllAppointments.css'
 
 const AdminAllAppointments = () => {
   const { adminToken, appointments, getAllAppointments, adminAppointmentCancel } =

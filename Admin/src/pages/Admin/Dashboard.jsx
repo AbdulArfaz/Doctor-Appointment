@@ -1,10 +1,10 @@
 import React from "react";
 import { useContext } from "react";
-import { AdminContext } from "../context/AdminContext";
+import { AdminContext } from "../../context/AdminContext.jsx";
 import { useEffect } from "react";
-import { assets } from "../assets_admin/assets.js";
-import "../styles/Dashboard.css";
-import { AppContext } from "../context/AppContext.jsx";
+import { assets } from "../../assets_admin/assets.js";
+import "../../styles/Dashboard.css";
+import { AppContext } from "../../context/AppContext.jsx";
 
 const Dashboard = () => {
   const { dashData, adminToken, getDashData, adminAppointmentCancel } =
@@ -25,9 +25,7 @@ const Dashboard = () => {
   return (
   dashData && (
     <div className="da-container">
-      {/* Top Cards Grid */}
       <div className="da-grid">
-        {/* Doctors Card */}
         <div className="da-card da-doc">
           <div className="da-icon">
             <img src={assets.doctor_icon} alt="Doctors" />

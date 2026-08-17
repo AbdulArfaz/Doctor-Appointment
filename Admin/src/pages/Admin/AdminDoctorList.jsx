@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
-import { AdminContext } from '../context/AdminContext'
-import '../styles/AdminDoctorList.css'
+import { AdminContext } from '../../context/AdminContext'
+import '../../styles/AdminDoctorList.css'
 
 const AdminDoctorList = () => {
 

@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
-import { assets } from '../assets_admin/assets'
-import '../styles/AdminAddDoctor.css'
+import { assets } from '../../assets_admin/assets'
+import '../../styles/AdminAddDoctor.css'
 import { useState } from 'react';
-import { AdminContext } from '../context/AdminContext';
+import { AdminContext } from '../../context/AdminContext';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
