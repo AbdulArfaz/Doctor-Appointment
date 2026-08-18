@@ -113,4 +113,97 @@ return res
 .json(new ApiResponse(200, appointments, 'Appointments retrieved successfully'))
 })
 
-export { changeAvailability, doctorsAll, doctorLogin, doctorAppointments };
+const appointmentComplete = asyncHandler(async(req,res)=>{
+  const { appointmentId } =req.body;
+  const docId = req.doctor?._id;
+ 
+  const appointmentData =await Appointment.findById(appointmentId)
+  if (!appointmentData || String(appointmentData.docId) !== String(docId)) {
+    return res.status(400)
+    .json(new ApiResponse(400, 'Invalid appointment or unauthorized doctor access'))
+  }
+
+   await Appointment.findByIdAndUpdate(appointmentId, {isCompleted: true})
+
+  return res
+  .status(200)
+  .json(new ApiResponse(200,{},'Appointment completed successfully'))
+})
+
+
+const appointmentCancel = asyncHandler(async(req,res)=>{
+  
+  const { appointmentId } =req.body;
+  const docId = req.doctor?._id;
+
+  const appointmentData =await Appointment.findById(appointmentId)
+  if (!appointmentData || String(appointmentData.docId) !== String(docId)) {
+    return res.status(400)
+    .json(new ApiResponse(400, 'Invalid appointment or unauthorized doctor access'))
+  }
+
+   await Appointment.findByIdAndUpdate(appointmentId, {cancelled: true})
+
+   const { slotDate, slotTime } = appointmentData;
+    const doctorData = await Doctor.findById(docId);
+
+    if (doctorData) {
+        let slots_booked = doctorData.slots_booked || {};
+
+        if (slots_booked[slotDate] && Array.isArray(slots_booked[slotDate]) && slotTime) {
+            const targetTime = String(slotTime).trim().toLowerCase();
+
+            slots_booked[slotDate] = slots_booked[slotDate].filter((time) => {
+                return time && String(time).trim().toLowerCase() !== targetTime;
+            });
+
+            if (slots_booked[slotDate].length === 0) {
+                delete slots_booked[slotDate];
+            }
+          
+            doctorData.slots_booked = slots_booked;
+            doctorData.markModified('slots_booked'); 
+            await doctorData.save();
+        }
+    }
+
+  return res
+  .status(200)
+  .json(new ApiResponse(200,{ success : true},'Appointment cancelled successfully'))
+})
+
+const doctorDashboard = asyncHandler(async (req, res) => {
+    const docId = req.doctor?._id;
+    const appointments = await Appointment.find({ docId });
+
+    let earnings = 0;
+    const patientSet = new Set();
+
+    appointments.forEach((item) => {
+        if (item.isCompleted || item.payment) {
+            earnings += item.amount;
+        }
+        if (item.userId) {
+            patientSet.add(item.userId.toString());
+        }
+    });
+
+    const dashData = {
+        earnings,
+        appointments: appointments.length,
+        patients: patientSet.size,
+        latestAppointments: [...appointments].reverse().slice(0, 5)
+    };
+
+    return res
+        .status(200)
+        .json(new ApiResponse(200, dashData, 'Dashboard data fetched successfully'));
+});
+
+export { changeAvailability,
+        doctorsAll,
+        doctorLogin,
+        doctorAppointments,
+        appointmentComplete,
+        appointmentCancel,
+        doctorDashboard };

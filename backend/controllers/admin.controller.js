@@ -121,10 +121,9 @@ const allDoctorsList = asyncHandler(async(req,res)=>{
 })
 
 export const appointmentsAdmin = asyncHandler(async (req, res) => {
-    const appointments = await Appointment.find({})
+    const appointments = await Appointment.find({}).sort({ createdAt: -1})
     res.json({ success: true, appointments })
 })
-
 export const adminAppointmentCancel = asyncHandler(async(req,res)=>{
   const { appointmentId } = req.body;
   
@@ -136,20 +135,19 @@ export const adminAppointmentCancel = asyncHandler(async(req,res)=>{
   if (!appointmentData) {
     throw new ApiError(404,'Appointment record not found in DataBase')
   }
-
   await Appointment.findByIdAndUpdate(appointmentId, {cancelled: true})
 
   const {docId, slotDate, slotTime} = appointmentData
   const doctorData = await Doctor.findById(docId);
-
   if (doctorData) {
         let slots_booked = doctorData.slots_booked || {};
 
+        if (slots_booked[slotDate] && Array.isArray(slots_booked[slotDate]) && slotTime) {
+        const targetTime = String(slotTime).trim().toLowerCase();
 
-        if (slots_booked[slotDate]) {
-            slots_booked[slotDate] = slots_booked[slotDate].filter(
-                (time) => time.trim().toLowerCase() !== slotTime.trim().toLowerCase()
-            );
+        slots_booked[slotDate] = slots_booked[slotDate].filter((time) => {
+            return time && String(time).trim().toLowerCase() !== targetTime;
+        });
             doctorData.slots_booked = slots_booked;
             doctorData.markModified('slots_booked');
             await doctorData.save();
