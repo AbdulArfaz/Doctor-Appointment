@@ -101,11 +101,9 @@ const bookAppointment = async () =>{
     return toast.warn('Please select a time slot first')
   }
   try { 
-        if (!docSlots || !docSlots[slotIndex] || !docSlots[slotIndex][0]) {
+        if (!docSlots || !docSlots[slotIndex] || !docSlots[slotIndex].length === 0) {
           return toast.error('Selected slot is invalid or unavailable')
         }
-
-
     const date = docSlots[slotIndex][0].datetime
 
     let day = date.getDate()
@@ -119,7 +117,7 @@ const bookAppointment = async () =>{
   )
   if (data.success) {
     toast.success(data.message)
-    getDoctorsData()
+    await getDoctorsData()
     navigate('/my-appointments')
   }else{
     toast.error(data.message)
