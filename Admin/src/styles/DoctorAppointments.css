@@ -1,0 +1,195 @@
+.doc-ap-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 1.5rem auto;
+  padding: 1.5rem;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.doc-ap-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 1rem;
+}
+
+.doc-ap-table {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow-x: auto;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+  border: 1px solid #e2e8f0;
+}
+
+
+.doc-ap-header,
+.doc-ap-row {
+  display: grid;
+  grid-template-columns: 0.5fr 2fr 1fr 0.8fr 2fr 1fr 1fr;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1.25rem;
+}
+
+
+.doc-ap-header {
+  background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 50%, #06b6d4 100%);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+
+.doc-ap-row {
+  font-size: 0.9rem;
+  color: #334155;
+  border-bottom: 1px solid #f1f5f9;
+  transition: all 0.2s ease-in-out;
+}
+
+.doc-ap-row:nth-child(even) {
+  background: linear-gradient(90deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+.doc-ap-row:hover {
+  background: linear-gradient(90deg, #e0e7ff 0%, #f0f9ff 100%);
+}
+
+
+.doc-ap-index {
+  font-weight: 600;
+  color: #64748b;
+}
+
+.doc-ap-patient {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.doc-ap-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e0e7ff;
+}
+
+.doc-ap-patient-name {
+  font-weight: 500;
+  color: #0f172a;
+}
+
+
+.doc-ap-badge {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.doc-ap-online {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.doc-ap-cash {
+  background-color: #fef9c3;
+  color: #a16207;
+}
+
+.doc-ap-amount {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.doc-ap-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.doc-ap-btn {
+  border: 1px solid transparent;
+  cursor: pointer;
+  padding: 0.45rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.doc-ap-btn img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.doc-ap-cancel-btn {
+  background-color: #fef2f2;
+  border-color: #fca5a5;
+}
+
+.doc-ap-cancel-btn:hover {
+  background-color: #fee2e2;
+  border-color: #ef4444;
+  transform: scale(1.08);
+}
+
+.doc-ap-tick-btn {
+  background-color: #f0fdf4;
+  border-color: #86efac;
+}
+
+.doc-ap-tick-btn:hover {
+  background-color: #dcfce7;
+  border-color: #22c55e;
+  transform: scale(1.08);
+}
+
+.status-text {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.status-cancelled {
+  color: #ea580c; 
+}
+
+.status-completed {
+  color: #16a34a; 
+}
+
+@media (max-width: 768px) {
+  .doc-ap-header {
+    display: none;
+  }
+
+  .doc-ap-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border: 1px solid #e2e8f0;
+  }
+
+  .doc-ap-patient {
+    grid-column: span 2;
+  }
+
+  .doc-ap-actions {
+    grid-column: span 2;
+    justify-content: flex-end;
+  }
+}

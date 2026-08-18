@@ -29,7 +29,6 @@ const AdminLogin = () => {
           const token = data.data.accessToken;
           setAdminToken(token);
           localStorage.setItem("accessToken", token);
-          // navigate('/admin-dashboard')
           toast.success(data.message);
         } else {
           toast.error(data.message);
@@ -43,7 +42,6 @@ const AdminLogin = () => {
           const token = data.data.accessToken;
           setDocToken(token);
           localStorage.setItem("docToken", token);
-          // navigate('/doctor-dashboard')
           toast.success(data.message);
         } else {
           toast.error(data.message);
