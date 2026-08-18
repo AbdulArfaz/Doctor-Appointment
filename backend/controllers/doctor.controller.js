@@ -2,6 +2,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { Doctor } from "../models/doctor.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
+import { Appointment } from '../models/appointment.model.js'
 
 const generateAccessAndRefreshTokens = async (doctorId) => {
   try {
@@ -100,4 +101,16 @@ const doctorLogin = asyncHandler(async (req, res) => {
     );
 });
 
-export { changeAvailability, doctorsAll, doctorLogin };
+const doctorAppointments = asyncHandler(async(req,res)=>{
+
+const docId  = req.doctor?._id;
+if (!docId) {
+  throw new ApiError(400, 'Doctor reference missing from request')
+}
+const appointments = await Appointment.find({docId})
+return res
+.status(200)
+.json(new ApiResponse(200, appointments, 'Appointments retrieved successfully'))
+})
+
+export { changeAvailability, doctorsAll, doctorLogin, doctorAppointments };
