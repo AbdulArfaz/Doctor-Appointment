@@ -53,6 +53,30 @@ const DoctorProfile = () => {
       toast.error(error.response?.data?.message || "Failed to update profile");
     }
   };
+
+//new
+const changeAvailability = async () => {
+  try {
+    const { data } = await axios.post(
+      `${backendurl}/api/doctors/change-availability`,
+      { docId: profileData._id },
+      { headers: {Authorization: `Bearer ${docToken}` }} // Or whatever your doctor token variable is named
+    );
+
+    if (data.success) {
+      toast.success(data.message);
+      getProfileData()
+      // Fetch the profile data again so everything stays synced 
+    } else {
+      toast.error(data.message);
+    }
+  } catch (error) {
+    console.log(error);
+    toast.error(error.message);
+  }
+};
+
+
   useEffect(() => {
     if (docToken) {
       getProfileData();
@@ -218,13 +242,16 @@ const DoctorProfile = () => {
 
             <div className="up-profile-checkbox-box">
               <input
-                onChange={() =>
-                  isEdit &&
+
+              onChange={()=>{
+                if (isEdit) {
                   setProfileData((prev) => ({
                     ...prev,
                     available: !prev.available,
                   }))
+                  changeAvailability()
                 }
+              }}
                 checked={profileData.available || false}
                 type="checkbox"
                 id="available"

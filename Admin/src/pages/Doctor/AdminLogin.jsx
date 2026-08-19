@@ -14,7 +14,7 @@ const AdminLogin = () => {
  
 
   const { setAdminToken, backendurl } = useContext(AdminContext);
-  const { setDocToken } = useContext(DoctorContext);
+  const { setDocToken, setProfileData } = useContext(DoctorContext);
 
   const submitHandler = async (evt) => {
     evt.preventDefault();
@@ -40,6 +40,7 @@ const AdminLogin = () => {
         });
         if (data.success) {
           const token = data.data.accessToken;
+          setProfileData(null)
           setDocToken(token);
           localStorage.setItem("docToken", token);
           toast.success(data.message);

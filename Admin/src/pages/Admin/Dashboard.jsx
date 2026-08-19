@@ -79,7 +79,7 @@ const Dashboard = () => {
                 <p className="da-green">Completed</p> 
                 )  :  (
                 <img
-                  className="da-cancel-btn"
+                  className="da-cancel-icon"
                   onClick={() => adminAppointmentCancel(item._id)}
                   src={assets.cancel_icon}
                   alt="Cancel"

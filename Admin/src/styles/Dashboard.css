@@ -151,13 +151,16 @@
   font-size: 16px;
 }
 
-.da-cancel-btn {
+.da-cancel-icon {
   width: 2.25rem;
   height: 2.25rem;
   cursor: pointer;
-  transition: transform 0.15s ease;
+  padding: 4px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
 }
 
-.da-cancel-btn:hover {
+.da-cancel-icon:hover {
   transform: scale(1.1);
+  background-color: rgba(0, 0, 0, 0.05);
 }
