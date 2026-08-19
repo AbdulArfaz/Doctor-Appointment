@@ -10,11 +10,7 @@ const app = express()
 app.use(cookieParser())
 
 app.use(cors({
-    origin: ['http://localhost:5173',
-         'http://localhost:5174',
-        'https://doctor-appointment-esr90uxin-myself-4477.vercel.app',
-        'https://doctor-appointment-nmli-e08xhg3rm-myself-4477.vercel.app'
-        ],
+    origin: true,
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: ["Content-Type",'token','aToken', "Authorization","adminToken"]
