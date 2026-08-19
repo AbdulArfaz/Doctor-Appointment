@@ -26,7 +26,7 @@ A comprehensive full-stack multi-role web application designed to streamline adm
 
 ## Project Structure
 
-
+```text
 DABS/
 ├── Admin/         # Admin and Doctor dashboard application
 ├── backend/       # Node.js server and API
