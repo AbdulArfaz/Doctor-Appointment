@@ -23,7 +23,7 @@ const AppContextProvider = (props) => {
 
   const getDoctorsData = async () => {
     try {
-      const { data } = await axios.get(backendurl + "/api/doctors/list");
+      const { data } = await axios.get(`${backendurl}/api/doctors/list`);
 
       if (data.success) {     
         setDoctors(data.data);
@@ -38,7 +38,7 @@ const AppContextProvider = (props) => {
 
   const loadUserProfileImage = async () => {
         try {
-            const { data } = await axios.get(`backendurl + "/api/user/get-profile"`, {
+            const { data } = await axios.get(`${backendurl}/api/user/get-profile`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             if (data.success) {
