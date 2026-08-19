@@ -1,6 +1,10 @@
 
 # Doctor Appointment Booking System (DABS) 
 
+Live Links:
+          -User Frontend:          doctor-appointment-swart-one.vercel.app
+          -Admin/Doctor Dashboard: doctor-appointment-nmli.vercel.app
+
 A comprehensive full-stack multi-role web application designed to streamline administration, user interactions, and backend services.
 
 ## Features
@@ -23,6 +27,12 @@ A comprehensive full-stack multi-role web application designed to streamline adm
 
 - Database:
   - MongoDB & Mongoose
+
+# Deployment & Infrastructure
+
+- Frontend & Admin Panels: Deployed and hosted on Vercel with continuous integration from GitHub.
+- Backend API: Hosted as a web service on Render, connected to MongoDB Atlas.
+
 
 ## Project Structure
 
