@@ -12,8 +12,8 @@ app.use(cookieParser())
 app.use(cors({
     origin: ['http://localhost:5173',
          'http://localhost:5174',
-        'https://doctor-appointment-nmli.vercel.app',
-        'https://doctor-appointment-swart-one.vercel.app'
+        'https://doctor-appointment-2wp5pt51i-myself-4477.vercel.app',
+        'https://doctor-appointment-nmli-aiful1nom-myself-4477.vercel.app'
         ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
