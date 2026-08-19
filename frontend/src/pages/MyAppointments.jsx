@@ -93,7 +93,7 @@ const MyAppointments = () => {
             { headers: { token } },
           );
 
-          if (data.statusCode === 200) {
+          if (data.success) {
             toast.success("Payment Successful!");
             getUserAppointments();
             getDoctorsData();
@@ -121,7 +121,7 @@ const MyAppointments = () => {
         { appointmentId },
         { headers: { token } },
       );
-      if (data.statusCode === 200) {
+      if (data.success) {
         initPay(data.data, appointmentId);
       }
     } catch (error) {
