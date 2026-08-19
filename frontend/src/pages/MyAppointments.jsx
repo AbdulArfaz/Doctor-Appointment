@@ -163,10 +163,10 @@ const MyAppointments = () => {
             </div>
 
             <div className="actions">
-              {!item.cancelled && item.payment && (
+              {!item.cancelled && item.payment && !item.isCompleted &&  (
                 <button className="btn-primary">Paid</button>
               )}
-              {!item.cancelled && !item.payment && (
+              {!item.cancelled && !item.payment && !item.isCompleted &&  (
                 <button
                   onClick={() => appointmentRazorpay(item._id)}
                   className="btn-primary"
@@ -174,7 +174,7 @@ const MyAppointments = () => {
                   Pay Online
                 </button>
               )}
-              {!item.cancelled && (
+              {!item.cancelled && !item.isCompleted &&  (
                 <button
                   onClick={() => cancelAppointment(item._id)}
                   className="btn-outline"
@@ -182,9 +182,13 @@ const MyAppointments = () => {
                   Cancel Appointment
                 </button>
               )}
-              {item.cancelled && (
+              {item.cancelled && !item.isCompleted &&  (
                 <button className="btn-primary">Appointment Cancelled</button>
               )}
+
+              {
+                item.isCompleted && <button className="btn-primary-green">Completed</button>
+              }
             </div>
           </div>
         ))}

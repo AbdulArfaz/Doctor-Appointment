@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { useEffect } from "react";
 
 const Login = () => {
-  //new
+ 
   const {backendurl,setToken,setUserData} = useContext(AppContext)
   const navigate  = useNavigate()
 
@@ -20,7 +20,7 @@ const Login = () => {
 
   const handleSubmit =async (evt) => {
     evt.preventDefault();
-    //new
+   
     try {
       if (state === 'Sign Up') {
         const {data} = await axios.post(`${backendurl}/api/user/register`,{name,email,password})

@@ -43,7 +43,7 @@
   font-size: 12px;
 }
 
-/* Main Navbar */
+
 .navbar {
   position: sticky;
   top: 0;
@@ -59,7 +59,7 @@
   border-bottom: 1px solid #f0f4f8;
 }
 
-/* Logo */
+
 .logo {
   display: flex;
   align-items: center;
@@ -84,7 +84,7 @@
   color: #1d3557;
 }
 
-/* Nav Links - Desktop */
+
 .nav-links {
   display: flex;
   align-items: center;
@@ -121,7 +121,7 @@
   border-radius: 2px;
 }
 
-/* Nav Actions */
+
 .nav-action {
   display: flex;
   align-items: center;
@@ -145,7 +145,7 @@
   transform: translateY(-1px);
 }
 
-/* Profile Dropdown */
+
 .profile-container {
   position: relative;
   cursor: pointer;
@@ -222,7 +222,7 @@
   color: #1b5380;
 }
 
-/* Toggle Menu Button (hidden on desktop) */
+
 .menu-toggle-btn {
   display: none;
   background: transparent;
@@ -233,7 +233,7 @@
   padding: 4px;
 }
 
-/* Responsive Mobile Layout */
+
 @media (max-width: 768px) {
   .topnavbar-container {
     justify-content: center;

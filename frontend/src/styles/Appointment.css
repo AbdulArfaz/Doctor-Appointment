@@ -177,7 +177,7 @@
   margin: 0 0 1.25rem 0;
 }
 
-/* Day / Date Grid */
+
 .days-container {
   display: flex;
   gap: 0.75rem;
@@ -186,7 +186,7 @@
   scroll-behavior: smooth;
 }
 
-/* Hide scrollbar for cleaner look */
+
 .days-container::-webkit-scrollbar {
   display: none;
 }
@@ -246,7 +246,7 @@
   color: #ffffff;
 }
 
-/* Time Slot Chips Grid */
+
 .times-container {
   display: flex;
   flex-wrap: wrap;
@@ -281,7 +281,7 @@
   box-shadow: 0 0 0 1px #4f46e5;
 }
 
-/* Primary CTA Button */
+
 .book-button {
   margin-top: 2rem;
   background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);

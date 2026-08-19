@@ -20,10 +20,19 @@ const[edit,setEdit]= useState(false)
                 const response = await axios.get('/api/user/get-profile', {
                     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
                 });
-                console.log('Full response:', response.data);
-                
+               
                 const profileData = response.data.data || response.data.user
                if (profileData) {
+
+                let parsedAddress = profileData.address;
+            if (typeof parsedAddress === 'string') {
+                try {
+                    parsedAddress = JSON.parse(parsedAddress);
+                } catch (e) {
+                    parsedAddress = { line1: '', line2: '' };
+                }
+            }
+
                 setUserData({
                     name: profileData.name || '',
                     email: profileData.email || '',
@@ -43,7 +52,7 @@ const[edit,setEdit]= useState(false)
       fetchProfile()
     },[])
 
-    // 2. Function to save updated data back to API
+    
     const handleSave = async (e) => {
       if(e) e.preventDefault()
         try {
@@ -54,7 +63,7 @@ const[edit,setEdit]= useState(false)
         formData.append('gender', userData.gender);
         formData.append('dob', userData.dob);
 
-        // Append image file if a new file was selected
+       
         if (image) {
             formData.append('image', image);
         }
@@ -137,7 +146,7 @@ const[edit,setEdit]= useState(false)
               <input
                 type="text"
                 className="mp-inp"
-                value={userData.address.line1}
+                value={userData.address.line1 || ''}
                 onChange={(e) =>
                   setUserData((prev) => ({
                     ...prev,
@@ -148,7 +157,7 @@ const[edit,setEdit]= useState(false)
               <input
                 type="text"
                 className="mp-inp"
-                value={userData.address.line2}
+                value={userData.address.line2 || ''}
                 onChange={(e) =>
                   setUserData((prev) => ({
                     ...prev,

@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from 'react-router-dom'
 
 export const AppContext = createContext();
 
@@ -18,6 +19,7 @@ const AppContextProvider = (props) => {
       : false,
   );
   const [userData, setUserData] = useState(false);
+  const navigate = useNavigate()
 
   const getDoctorsData = async () => {
     try {
@@ -49,7 +51,7 @@ const AppContextProvider = (props) => {
         }
     };
 
-  //new
+ 
   const logoutUser = async () => {
     try {
       if (token) {
@@ -66,6 +68,7 @@ const AppContextProvider = (props) => {
       setUserData(false);
       localStorage.removeItem("token");
       toast.success("Logged out Successfully");
+      navigate('/')
     }
   };
 

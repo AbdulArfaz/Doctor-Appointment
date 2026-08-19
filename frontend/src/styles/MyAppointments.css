@@ -81,6 +81,15 @@ button {
   background-color: #2563eb;
   color: #fff;
 }
+.btn-primary-green {
+  background-color: rgb(3, 99, 3);
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+}
+.btn-primary-green:hover{
+  background-color: green;
+}
 
 .btn-primary:hover {
   background-color: #1d4ed8;

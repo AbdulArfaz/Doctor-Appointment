@@ -8,7 +8,7 @@
   padding: 20px;
 }
 
-/* Left Image styling */
+
 .contactimg-container {
   flex: 1;
   display: flex;
@@ -23,7 +23,7 @@
   object-fit: cover;
 }
 
-/* Right Card styling */
+
 .contacts-card {
   flex: 1;
   background: #111827;
@@ -108,7 +108,7 @@
   text-decoration: underline;
 }
 
-/* Responsive adjustment for mobile screens */
+
 @media (max-width: 768px) {
   .contacts-wrapper {
     flex-direction: column;
