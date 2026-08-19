@@ -50,6 +50,7 @@ const changeAvailability = asyncHandler(async (req, res) => {
     );
 });
 
+
 const doctorsAll = asyncHandler(async (req, res) => {
   const doctors = await Doctor.find({}).select("-password -email");
   if (!doctors) {
@@ -57,7 +58,7 @@ const doctorsAll = asyncHandler(async (req, res) => {
   }
   return res
     .status(200)
-    .json(new ApiResponse(200, doctors, "get all doctors successfully"));
+    .json(new ApiResponse(200,doctors,'doctos fetched properly'));
 });
 
 const doctorLogin = asyncHandler(async (req, res) => {

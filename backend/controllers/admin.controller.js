@@ -56,7 +56,6 @@ const addDoctor = asyncHandler (async (req,res)=>{
         date:Date.now()
      })
 
-    console.log("New Doctor created successfully: ", doctorData);
     
       return res.status(201).json(
         new ApiResponse(200, doctorData, "Doctor added successfully")
@@ -84,9 +83,7 @@ const loginAdmin = asyncHandler(async (req,res)=>{
       httpOnly: true,
       secure: true
      }
-     console.log(`Admin logged in Successfully: , ${admin.email}`);
      
-
      return res
      .status(200)
      .cookie("accessToken", accessToken, options)
