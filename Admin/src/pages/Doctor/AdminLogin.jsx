@@ -5,13 +5,13 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import "../../styles/AdminLogin.css";
 import { DoctorContext } from "../../context/DoctorContext.jsx";
-// import { useNavigate } from 'react-router-dom'
+
 
 const AdminLogin = () => {
   const [state, setState] = useState("Admin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const navigate = useNavigate()
+ 
 
   const { setAdminToken, backendurl } = useContext(AdminContext);
   const { setDocToken } = useContext(DoctorContext);

@@ -75,7 +75,9 @@ const Dashboard = () => {
               </div>
               {item.cancelled ? (
                 <p className="da-status-cancel">Cancelled</p>
-              ) : (
+              ) : item.isCompleted ? (
+                <p className="da-green">Completed</p> 
+                )  :  (
                 <img
                   className="da-cancel-btn"
                   onClick={() => adminAppointmentCancel(item._id)}

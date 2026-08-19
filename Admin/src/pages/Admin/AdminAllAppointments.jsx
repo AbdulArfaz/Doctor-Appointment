@@ -33,7 +33,7 @@ return (
       </div>
 
     
-      {appointments.map((item, index) => (
+      {appointments.slice().reverse().map((item, index) => (
         <div key={index} className="ad-ap-row">
           <p className="ad-ap-index">{index + 1}</p>
 
@@ -61,6 +61,9 @@ return (
             {item.cancelled ? (
               <p className="ad-ap-cancelled">Cancelled</p>
             ) : (
+              item.isCompleted ?
+              <p>Completed</p> 
+              :
               <img
                 onClick={()=>adminAppointmentCancel(item._id)}
                 className="ad-ap-cancel-btn"

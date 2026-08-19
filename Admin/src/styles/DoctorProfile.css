@@ -1,0 +1,221 @@
+.up-profile-container {
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #2563eb 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+
+.up-profile-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 1.25rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  width: 100%;
+  max-width: 900px;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .up-profile-card {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+
+.up-profile-img-wrapper {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.up-profile-img-label {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.up-profile-img {
+  width: 180px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.up-profile-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.up-profile-img-label:hover .up-profile-img-overlay {
+  opacity: 1;
+}
+
+
+.up-profile-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.up-profile-name {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.up-profile-subheading {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.up-profile-degree {
+  font-size: 1.1rem;
+  color: #475569;
+  font-weight: 500;
+  margin: 0;
+}
+
+.up-profile-exp-badge {
+  background: #e0e7ff;
+  color: #4338ca;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+}
+
+
+.up-profile-label {
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.25rem;
+  font-size: 0.95rem;
+}
+
+.up-profile-text {
+  color: #64748b;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.up-profile-fee {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.up-profile-currency-val {
+  color: #4f46e5;
+  margin-left: 0.5rem;
+}
+
+
+.up-profile-input, 
+.up-profile-textarea, 
+.up-profile-input-small {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.up-profile-input-small {
+  width: 120px;
+  display: inline-block;
+  margin-left: 0.5rem;
+}
+
+.up-profile-input:focus, 
+.up-profile-textarea:focus, 
+.up-profile-input-small:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+
+.up-profile-checkbox-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.up-profile-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: #4f46e5;
+  cursor: pointer;
+}
+
+.up-profile-checkbox-label {
+  color: #334155;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+
+.up-profile-btn-wrapper {
+  margin-top: 0.5rem;
+}
+
+.up-profile-btn {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.up-profile-btn-edit {
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+.up-profile-btn-edit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4);
+}
+
+.up-profile-btn-save {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.up-profile-btn-save:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+}
