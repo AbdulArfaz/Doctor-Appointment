@@ -16,11 +16,9 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
  
-
-
   const handleSubmit =async (evt) => {
     evt.preventDefault();
-   
+
     try {
       if (state === 'Sign Up') {
         const {data} = await axios.post(`${backendurl}/api/user/register`,{name,email,password})
@@ -46,7 +44,12 @@ const Login = () => {
         }
       }
     } catch (error) {
-      toast.error(error.response?.data?.message || error.message)
+      const backendMessage = error.response?.data?.message || error.response?.data;
+
+      const errorMessage = typeof backendMessage === 'string'
+      ? backendMessage
+      : (error.response?.status === 404 ? "User does not exist" : error.message)
+      toast.error(errorMessage)
     }
   };
 

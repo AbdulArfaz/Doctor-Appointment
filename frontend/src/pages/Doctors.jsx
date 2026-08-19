@@ -66,8 +66,10 @@ const Doctors = () => {
 
               <div className="card-info">
                 <div className="status-indicator">
-                  <span className="ping-dot"></span>
-                  <span>Available</span>
+                  <span className={`ping-dot${item.available ? '' : 'not-available'}`}></span>
+                  <span className={item.available ? '' : 'text-not-available'}>
+                  {item.available ? 'Available' : 'Not available'}
+                  </span>
                 </div>
                 <h3 className="doctor-name">{item.name}</h3>
                 <p className="doctor-speciality">{item.speciality}</p>

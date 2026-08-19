@@ -3,10 +3,12 @@ import '../styles/TopDoctors.css'
 import {useNavigate} from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
 
+
 const TopDoctors = () => {
    
     const navigate=useNavigate()
     const {doctors} = useContext(AppContext)
+
 
   return (
     <div className='top-doctors-container'>
@@ -28,8 +30,11 @@ const TopDoctors = () => {
             
             <div className='doctor-info'>
               <div className='status-container'>
-                <span className='status-dot'></span>
-                <span>Available</span>
+                <span className={`status-dot ${item.available ? '' :'not-available'} `}></span>
+                <span className={item.available ? '' : 'text-not-available'}>
+                  {item.available ? 'Available' : 'Not available'}
+                </span>
+               
               </div>
               <p className='doctor-name'>{item.name}</p>
               <p className='doctor-speciality'>{item.speciality}</p>

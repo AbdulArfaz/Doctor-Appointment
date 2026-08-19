@@ -123,7 +123,8 @@ const bookAppointment = async () =>{
     toast.error(data.message)
   }
   } catch (error) {
-    toast.error('Selected slot is not available')
+    const errorMessage = error.response?.data?.message || error.message || 'Something went Wrong';
+    toast.error(errorMessage)
     
   }
 }

@@ -190,6 +190,13 @@ body {
   opacity: 0.75;
   animation: pulse 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
+.status-dot.not-available,
+.ping-dot.not-available {
+  background-color: #ff4d4f;
+}
+.text-not-available {
+  color: #ff4d4f;
+}
 
 @keyframes pulse {
   0% {

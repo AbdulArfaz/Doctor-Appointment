@@ -110,6 +110,15 @@
   background-color: #22c55e;
   border-radius: 50%;
   box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
+  display: inline-block;
+}
+
+.status-dot.not-available {
+  background-color: #9ca3af;
+  box-shadow: 0 0 0 2px rgba(156, 163, 175, 0.2);
+}
+.text-not-available {
+  color: #6b7280;
 }
 
 .doctor-name {
