@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { AdminContext } from './context/AdminContext'
 import Navbar from './components/Admin.Navbar'
 import { Route, Routes, Navigate } from 'react-router-dom'
-import Dashboard from './pages/Admin/Dashboard'
+import AdminDashboard from './pages/Admin/AdminDashboard'
 import AdminAddDoctor from './pages/Admin/AdminAddDoctor'
 import AdminAllAppointment from './pages/Admin/AdminAllAppointments'
 import AdminDoctorList from './pages/Admin/AdminDoctorList'
@@ -33,8 +33,8 @@ const { docToken } =useContext(DoctorContext)
 
       { adminToken && (
        <>
-        <Route path='/' element={<Dashboard />} />
-        <Route path='/admin-dashboard' element={<Dashboard />} />
+        <Route path='/' element={<AdminDashboard />} />
+        <Route path='/admin-dashboard' element={<AdminDashboard />} />
         <Route path='/admin-addDoctor' element={<AdminAddDoctor />} />
         <Route path='/admin-allAppointments' element={<AdminAllAppointment />} />
         <Route path='/admin-doctorList' element={<AdminDoctorList />} />
