@@ -58,6 +58,9 @@ const doctorSchema = new Schema({
         slots_booked:{
             type:Object,
             default:{}
+        },
+        refreshToken: {
+            type: String
         }
 
 },{ minimize: true},{ timestamps: true})

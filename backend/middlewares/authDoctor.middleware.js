@@ -4,7 +4,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
 export const verifyDoctorJWT = asyncHandler(async (req, res, next) => {
-  try {
+  
     const token =
       req.cookies?.accessToken ||
       req.header("Authorization")?.replace("Bearer ", "");
@@ -19,7 +19,7 @@ export const verifyDoctorJWT = asyncHandler(async (req, res, next) => {
     );
 
     const doctor = await Doctor.findById(decodedToken?._id).select(
-      "-password -refreshToken",
+      "-password -refreshToken"
     );
 
     if (!doctor) {
@@ -28,10 +28,5 @@ export const verifyDoctorJWT = asyncHandler(async (req, res, next) => {
 
     req.doctor = doctor;
     next();
-  } catch (error) {
-    throw new ApiError(
-      401,
-      error?.message || "Invalid or expired doctor access token",
-    );
-  }
+  
 });

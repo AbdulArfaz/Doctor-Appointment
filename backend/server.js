@@ -3,7 +3,6 @@ import dotenv from 'dotenv'
 import connectDB from './db/mongodb.js'
 import uploadOnCloudinary from './db/cloudinary.js'
 
-
 dotenv.config({
     path: './.env'
 })

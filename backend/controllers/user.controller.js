@@ -70,7 +70,7 @@ const registerUser = asyncHandler(async (req, res) => {
   const user = await User.create(userData);
 
   const createdUser = await User.findById(user._id).select(
-    "-password -refreshToken",
+    "-password -refreshToken"
   );
   if (!createdUser) {
     throw new ApiError(500, "Something went wrong while registering");
@@ -103,7 +103,7 @@ const loginUser = asyncHandler(async (req, res) => {
     user._id,
   );
   const loggedInUser = await User.findById(user._id).select(
-    "-password -refreshToken",
+    "-password -refreshToken"
   );
 
   const options = {
@@ -137,7 +137,7 @@ const logoutUser = asyncHandler(async (req, res) => {
       },
     },
     {
-      new: true,
+      returnDocument: 'after',
     },
   );
   const options = {
@@ -215,7 +215,7 @@ export const getUserProfile = asyncHandler(async (req, res) => {
 });
 
 export const updateUserProfile = asyncHandler(async (req, res) => {
-  const { name, phone, address, gender, dob } = req.body;
+  let { name, phone, address, gender, dob } = req.body;
   const imageFile = req.file;
 
   if (typeof address === "string") {
@@ -303,7 +303,7 @@ export const bookAppointment = asyncHandler(async (req,res)=>{
   const newAppointment = new Appointment(appointmentData)
   await newAppointment.save()
 
-  //save new slots data in docData
+  
   await Doctor.findByIdAndUpdate(
     docId,
     {slots_booked},

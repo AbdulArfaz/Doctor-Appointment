@@ -7,11 +7,17 @@ import { Appointment } from '../models/appointment.model.js'
 const generateAccessAndRefreshTokens = async (doctorId) => {
   try {
     const doctor = await Doctor.findById(doctorId);
+    if (!doctor) {
+      throw new ApiError(404, 'Doctor not found')
+    }
     const accessToken = doctor.generateAccessToken();
     const refreshToken = doctor.generateRefreshToken();
 
-    doctor.refreshToken = refreshToken;
-    await doctor.save({ validateBeforeSave: false });
+   await Doctor.findByIdAndUpdate(
+    doctorId,
+    { $set: { refreshToken }},
+    { returnDocument : 'after'}
+   );
 
     return { accessToken, refreshToken };
   } catch (error) {
@@ -76,7 +82,7 @@ const doctorLogin = asyncHandler(async (req, res) => {
     doctor._id,
   );
   const loggedInDoctor = await Doctor.findById(doctor._id).select(
-    "-password -refreshToken",
+    "-password -refreshToken"
   );
 
   const options = {
@@ -200,10 +206,77 @@ const doctorDashboard = asyncHandler(async (req, res) => {
         .json(new ApiResponse(200, dashData, 'Dashboard data fetched successfully'));
 });
 
+const doctorProfile = asyncHandler(async(req,res)=>{
+
+  const docId = req.doctor?._id;
+  if (!docId) {
+    throw new ApiError(401,'Unauthorized request')
+  }
+  const profileData = await Doctor.findById(docId).select("-password -refreshToken")
+  if (!profileData) {
+    res.status(404)
+    throw new ApiError(404,'Doctor profile not found')
+  }
+   return res.status(200)
+   .json(
+    new ApiResponse(200, profileData, 'Doctor profile fetched successfully')
+   )
+})
+
+const updateDoctorProfile = asyncHandler(async(req,res)=>{
+  const docId = req.doctor?._id;
+
+  if (!docId) {
+    throw new ApiError(401, "Unauthorized request");
+  }
+
+  const {
+    name,
+    image,
+    degree,
+    experience,
+    about,
+    available,
+    fees,
+    address,
+  } = req.body;
+
+  const updateFields = {};
+  if (name !== undefined) updateFields.name = name;
+  if (image !== undefined) updateFields.image = image;
+  if (degree !== undefined) updateFields.degree = degree;
+  if (experience !== undefined) updateFields.experience = experience;
+  if (about !== undefined) updateFields.about = about;
+  if (available !== undefined) updateFields.available = available;
+  if (fees !== undefined) updateFields.fees = fees;
+  if (address !== undefined) updateFields.address = address;
+
+  if (address) {
+    try {
+      updateFields.address = typeof address === 'string' ? JSON.parse(address) : address;
+    } catch (err) {
+      updateFields.address = address;
+    }
+  }
+
+  const updatedDoctor = await Doctor.findByIdAndUpdate(
+    docId,
+    { $set: updateFields },
+    { returnDocument: 'after', runValidators: true }
+  ).select("-password -refreshToken");
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, updatedDoctor, "Doctor profile updated successfully"));
+})
+
 export { changeAvailability,
         doctorsAll,
         doctorLogin,
         doctorAppointments,
         appointmentComplete,
         appointmentCancel,
-        doctorDashboard };
+        doctorDashboard,
+        doctorProfile,
+        updateDoctorProfile,
+      };

@@ -63,8 +63,6 @@ const addDoctor = asyncHandler (async (req,res)=>{
      )
 })
 
-
-
 const loginAdmin = asyncHandler(async (req,res)=>{
 
       const {email,password} = req.body
@@ -109,11 +107,9 @@ const loginAdmin = asyncHandler(async (req,res)=>{
      )
 })
 
-
-
 const allDoctorsList = asyncHandler(async(req,res)=>{
 
-  const doctors = await Doctor.find({}).select('-password')
+  const doctors = await Doctor.find({}).select('-password -email');
   
   return res
   .status(200)
@@ -124,6 +120,7 @@ export const appointmentsAdmin = asyncHandler(async (req, res) => {
     const appointments = await Appointment.find({}).sort({ createdAt: -1})
     res.json({ success: true, appointments })
 })
+
 export const adminAppointmentCancel = asyncHandler(async(req,res)=>{
   const { appointmentId } = req.body;
   
@@ -161,7 +158,6 @@ export const adminAppointmentCancel = asyncHandler(async(req,res)=>{
     new ApiResponse(200, {},"Appointment Cancelled Successfully")
   )
 })
-
 
 export const adminDashboard = asyncHandler  (async (req,res) =>{
 
