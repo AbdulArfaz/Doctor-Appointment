@@ -72,7 +72,7 @@ export const assets = {
 
 export const specialityData = [
     {
-        speciality: 'General physician',
+        speciality: 'General Physician',
         image: genphysician
     },
     {
@@ -102,7 +102,7 @@ export const doctors = [
         _id: 'doc1',
         name: 'Dr. Siddhartha Goswami',
         image: drsiddharth,
-        speciality: 'General physician',
+        speciality: 'General Physician',
         degree: 'MD (Internal Medicine), IFCCM, Critical Care Fellowship (CMC, Vellore)',
         experience: '11 + Years',
         about: 'Dr Siddhartha Goswami is a highly experienced general physician and internal medicine specialist with over 11 years of dedicated service in the medical field. Dr Goswami holds an MD in Internal Medicine, an Indian Fellowship in Critical Care Medicine and a Critical Care Fellowship from the renowned Christian Medical College, Vellore, which underscores his extensive educational background',
@@ -186,7 +186,7 @@ export const doctors = [
         _id: 'doc7',
         name: 'Dr. Aswini Bezbarua',
         image: draswini,
-        speciality: 'General physician',
+        speciality: 'General Physician',
         degree: 'MD, PGDDM (UK)',
         experience: '22 Years',
         about: 'Dr. Aswini Bezbaruah, MD, PGDDM (UK), brings over 22 years of expertise in Internal Medicine, specializing in the treatment of abdominal pain and rare conditions like Abetalipoproteinemia. Known for delivering exceptional care, Dr. Bezbaruah treats conditions such as Acrodermatitis Enteropathica and offers innovative therapies for infections like Actinomycosis. Dr. Bezbaruah is also an expert in managing acute cases, including diarrhea, ensuring personalized care for every patient.',
@@ -272,7 +272,7 @@ export const doctors = [
         _id: 'doc13',
         name: 'Dr. Tandra Biswas',
         image: drtandra,
-        speciality: 'General physician',
+        speciality: 'General Physician',
         degree: 'MD, IDCCM',
         experience: '14 + Years',
         about: 'Dr. Tandra Biswas is a top General Physician/ Internal Medicine Specialist at Apollo Hospitals G S Road in Guwahati. Holding MD, IDCCM, Dr. Tandra Biswas specializes in diagnosing and treating a wide range of General Physician/ Internal Medicine conditions, including Acute Pancreatitis, Antibiotic-associated diarrhea, Brucellosis, Chickenpox, Chikungunya, and more.',
