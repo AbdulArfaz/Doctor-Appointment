@@ -36,7 +36,7 @@ const Doctors = () => {
             'Dermatologist',
             'Pediatricians',
             'Neurologist',
-            'General physician',
+            'General Physician',
             'Gastroenterologist'
           ].map((item) => (
             <Link
